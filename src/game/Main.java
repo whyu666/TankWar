@@ -14,12 +14,7 @@ import ui.SoundManager;
 import ui.StartScene;
 import ui.WinScene;
 
-/**
- * This is the main program, it is basically boilerplate to create
- * an animated scene.
- * 
- * @author Bill Yu
- */
+/** This is the main program, it is basically boilerplate to create an animated scene. */
 
 public class Main extends Application {
     private static final int SIZE = 680;
@@ -33,10 +28,8 @@ public class Main extends Application {
     private Timeline animation;
     
     private GameUI uiManager;
-    
     private SoundManager soundManager;
-    
-    
+
     class GameStart implements EventHandler<ActionEvent> {
     	public void handle(ActionEvent event) {
 			gameStart();
@@ -55,9 +48,8 @@ public class Main extends Application {
 		}
     }
 
-    /**
-     * Set things up at the beginning.
-     */
+    /** Set things up at the beginning. */
+
     @Override
     public void start (Stage s) {
     	this.stage = s;
@@ -68,9 +60,7 @@ public class Main extends Application {
     	stage.show();
     }
     
-    /**
-     * start the game play
-     */
+    /** start the game play */
     private void gameStart() {
     	// create your own game here
         myGame = new Game();
