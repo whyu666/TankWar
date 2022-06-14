@@ -80,9 +80,7 @@ public class Main extends Application {
         animation.play();
     }
     
-    /**
-     * the player wins
-     */
+    /** the player wins */
     public void gameWin() {
     	soundManager.playVictory();
     	Scene winScene = new WinScene(uiManager, SIZE, myGame).initScene();
@@ -90,9 +88,7 @@ public class Main extends Application {
     	clearGame();
     }
     
-    /**
-     * set the scene with game over scene
-     */
+    /** set the scene with game over scene */
     public void gameOver() {
     	soundManager.playDefeat();
     	Scene overScene = new OverScene(uiManager, SIZE, myGame).initScene();
