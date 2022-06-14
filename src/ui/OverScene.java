@@ -18,10 +18,10 @@ public class OverScene extends GameScene {
 	}
 	
 	public Scene initScene() {
-    	Label indicator = new Label("Game Over\nScore: " + myGame.getScore());
+    	Label indicator = new Label("游戏结束\n分数 : " + myGame.getScore());
     	indicator.setFont(new Font(20));
     	Button startButton = uiManager.initStartButton();
-    	startButton.setText("Play Again");
+    	startButton.setText("再玩一次");
     	Button leadersButton = uiManager.initLeadersButton();
     	Button exitButton = uiManager.initExitButton();
     	VBox root = new VBox();

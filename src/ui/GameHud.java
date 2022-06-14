@@ -31,7 +31,7 @@ public class GameHud {
 		configureGameHud(levelHud);
 		HBox box = new HBox();
 		box.getChildren().addAll(livesHud, timeHud, levelHud);
-		box.setSpacing(200);
+		box.setSpacing(240);  //居中显示
 		BorderPane.setAlignment(box, Pos.CENTER);
 		return box;
 	}
@@ -52,14 +52,14 @@ public class GameHud {
 	}
 	
 	public void updateLivesHud() {
-		livesHud.setText(String.format("Lives: %d", myGame.getLives()));
+		livesHud.setText(String.format("生命: %d", myGame.getLives()));
 	}
 	
 	public void updateTimeHud() {
-		timeHud.setText("Time: " + (Game.GAME_TIME_SECONDS - (System.nanoTime() - myGame.getStartTime()) / 1000000000L));
+		timeHud.setText("时间: " + (Game.GAME_TIME_SECONDS - (System.nanoTime() - myGame.getStartTime()) / 1000000000L));
 	}
 	
 	public void updateLevelHud() {
-		levelHud.setText("Level: " + myGame.getCurrentLevel());
+		levelHud.setText("关卡: " + myGame.getCurrentLevel());
 	}
 }

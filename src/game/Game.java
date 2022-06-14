@@ -23,7 +23,7 @@ enum Status {
 }
 
 public class Game {
-	private static final String TITLE = "Fight for Your Home";
+	private static final String TITLE = "保卫你的家";
 	private Status status = Status.Wait;
 	private int currentLevel = 0;
 

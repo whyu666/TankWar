@@ -23,7 +23,7 @@ public class WinScene extends GameScene {
     	root.setAlignment(Pos.CENTER);
     	
     	int score = myGame.getScore();
-    	Label indicator = new Label("You Won!\nScore: " + score);
+    	Label indicator = new Label("你赢了\n分数: " + score);
     	root.getChildren().add(indicator);
     	if (uiManager.getBoard().canGetOn(score)) {
     		root.getChildren().add(uiManager.initNameInput(score));
@@ -31,7 +31,7 @@ public class WinScene extends GameScene {
     	indicator.setFont(new Font(20));
     	Button startButton = uiManager.initStartButton();
     	Button leadersButton = uiManager.initLeadersButton();
-    	startButton.setText("Play Again");
+    	startButton.setText("再玩一次");
     	Button exitButton = uiManager.initExitButton();
     	
     	root.getChildren().addAll(startButton, leadersButton, exitButton);

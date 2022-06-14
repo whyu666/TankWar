@@ -41,7 +41,7 @@ public class GameUI {
 	 * @return button for game start
 	 */
 	public Button initStartButton() {
-		Button startButton = new Button("Start Game");
+		Button startButton = new Button("开始游戏");
 		startButton.setPrefWidth(120);
 		startButton.setOnAction(gameStart);
 		return startButton;
@@ -51,7 +51,7 @@ public class GameUI {
 	 * @return button for displaying leader board
 	 */
 	public Button initLeadersButton() {
-		Button leadersButton = new Button("Leader Board");
+		Button leadersButton = new Button("排行榜");
 		leadersButton.setPrefWidth(120);
 		leadersButton.setOnAction(showLeaders);
 		return leadersButton;
@@ -61,7 +61,7 @@ public class GameUI {
 	 * @return button to quit game
 	 */
 	public Button initExitButton() {
-		Button exitButton = new Button("Exit");
+		Button exitButton = new Button("退出游戏");
 		exitButton.setPrefWidth(120);
 		exitButton.setOnAction(gameExit);
 		return exitButton;
@@ -74,15 +74,15 @@ public class GameUI {
 	public VBox initNameInput(int score) {
     	VBox whole = new VBox();
     	whole.setAlignment(Pos.CENTER);
-    	Label indicator = new Label("You just got on the leader board!");
+    	Label indicator = new Label("你的成绩登上了排行榜");
     	whole.setSpacing(20);
     	HBox box = new HBox();
     	box.setAlignment(Pos.CENTER);
     	box.setPadding(new Insets(15, 12, 15, 12));
     	box.setSpacing(20);
-    	Label prompt = new Label("Name:");
+    	Label prompt = new Label("姓名:");
     	TextField input = new TextField();
-    	Button confirm = new Button("OK");
+    	Button confirm = new Button("确认");
     	confirm.setOnAction(event -> {
 			if (didInputName) {
 				indicator.setText("You've already put your name in!");

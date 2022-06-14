@@ -134,7 +134,7 @@ public class Main extends Application {
      * @param startScene the first scene that welcomes players
      */
     private void configureStage(Scene startScene) {
-    	stage.setTitle("TankWar");
+    	stage.setTitle("坦克大战");
     	stage.setScene(startScene);
     	stage.setResizable(false);
     }

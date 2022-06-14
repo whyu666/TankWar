@@ -16,7 +16,6 @@ import javafx.scene.text.TextAlignment;
  * Welcome scene of the game.
  */
 public class StartScene extends GameScene {
-	
 	public StartScene(GameUI manager, int SIZE) {
 		super(manager, SIZE);
 	}
@@ -36,7 +35,7 @@ public class StartScene extends GameScene {
 		text.setFont(new Font(16));
 		text.setWrappingWidth(400);
 		text.setTextAlignment(TextAlignment.CENTER);
-		text.setText("WASD or arrow keys to move around\n\nSpace to shoot\n\nProtect your home and destroy enemies");
+		text.setText("使用WASD或方向键进行移动\n\n空格键发射子弹\n\n保护你的家并摧毁敌人");
 		
     	buttons.getChildren().addAll(text, startButton);
     	buttons.setAlignment(Pos.CENTER);
@@ -48,7 +47,7 @@ public class StartScene extends GameScene {
      * @return the title label on the start scene
      */
     private Label initTitle() {
-    	Label title = new Label("Tank Battle");
+    	Label title = new Label("欢迎来到坦克大战");
     	title.setFont(new Font(20));
     	title.setPadding(new Insets(15, 15, 15, 15));
     	title.setTextAlignment(TextAlignment.CENTER);

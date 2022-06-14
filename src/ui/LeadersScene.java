@@ -30,7 +30,7 @@ public class LeadersScene extends GameScene {
     	
     	Node leaders = initLeadersView();
     	
-    	Label title = new Label("Leader Board");
+    	Label title = new Label("排行榜");
     	title.setFont(new Font(20));
     	title.setPadding(new Insets(15, 15, 15, 15));
     	title.setTextAlignment(TextAlignment.CENTER);
@@ -51,7 +51,7 @@ public class LeadersScene extends GameScene {
     	
         ArrayList<Leader> leaders = uiManager.getBoard().getLeaders();
         Button startButton = uiManager.initStartButton();
-        startButton.setText("Play Again");
+        startButton.setText("再玩一次");
         Button exitButton = uiManager.initExitButton();
         
         Node leadersBox = initLeadersBox(leaders);
