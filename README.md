@@ -1,7 +1,16 @@
 # TankWar
 CHD 2022 curriculum design - Integrated Practice of Basic Skills of Software Engineering
 
-编译运行：需选择SDK为Java1.8，且设置项目语言级别为8，运行game.Main
+开源许可协议：MIT License
+
+编译运行：需选择SDK为Java1.8，设置项目语言级别为8，运行game.Main启动游戏
+
+编写程序时注意：
+1. 新增的变量和函数，在此文档中说明
+2. 注意程序书写规范，包括括号位置、变量名函数名声明方式请保持和原程序一致
+3. 每次推送代码时，请写清修改、增加内容
+4. 有任何想法、问题，可以在Discussion中提出
+5. ......
 
 程序结构：  
 (1) stable：游戏中不动的元素  
