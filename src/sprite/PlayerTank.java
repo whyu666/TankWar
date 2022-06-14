@@ -10,26 +10,28 @@ import javafx.scene.media.MediaPlayer;
  * controlled by the player: Fire missile, move around and benefit from buffs.
  */
 public class PlayerTank extends Tank {
-	
-	private static final long IMMORTAL_DELAY = 5000 * 1000 * 100;
-	private long immortalStartTime = System.nanoTime();
+	private static final long IMMORTAL_DELAY = 5 * 1000 * 1000 * 100;  //buff持续时间：5秒
+	private long immortalStartTime = System.nanoTime();  //生成玩家坦克时，记录时间
 	
 	public PlayerTank(ArrayList<Sprite> elements) {
 		super(elements);
 		setGreen();
 		BITMASK = Game.PLAYER_TANK_MASK;
-		buffImmortal();
+		buffImmortal();  //初始化时，添加buff
 	}
 	
 	public void update(double time) {
 		super.update(time);
-		missileDirection = getDirection() != Direction.NONE ? getDirection() : missileDirection;
+		SPEED = 1000;  //控制玩家坦克速度
+		if (getDirection() != Direction.NONE) {  //当坦克方向改变时，子弹发射方向也随之改变
+			missileDirection = getDirection();
+		}
 		setDirection(Direction.NONE);
 		checkImmortalOut();
 	}
 	
 	private void checkImmortalOut() {
-		if (System.nanoTime() - immortalStartTime > IMMORTAL_DELAY * 10) {
+		if (System.nanoTime() - immortalStartTime > IMMORTAL_DELAY * 10) {  //buff持续时间
 			debuffImmortal();
 		}
 	}
@@ -40,27 +42,27 @@ public class PlayerTank extends Tank {
 	
 	public void buffImmortal() {
 		setRed();
-		health = Integer.MAX_VALUE;
+		health = Integer.MAX_VALUE;  //在有buff时，处于无敌状态
 		immortalStartTime = System.nanoTime();
 	}
 	
 	public void debuffImmortal() {
-		health = 1;
+		health = 1;  //当前生命值为1，碰到敌方坦克或子弹即死
 		setGreen();
 	}
 	
 	protected void dealWithCollision(Sprite s) {
-		if (s.BITMASK == Game.ENEMY_MISSILE_MASK
-				|| s.BITMASK == Game.ENEMY_TANK_MASK) {
+		if (s.BITMASK == Game.ENEMY_MISSILE_MASK || s.BITMASK == Game.ENEMY_TANK_MASK) {  //当碰到敌方坦克或子弹时，失去一点生命值
 			health--;
 		}
 	}
-	
-	public void playDeadSound() {
+
+	//这段代码程序没有使用，deprecated，如果确认无用，后期将删除，同时注意修改import部分。
+	/*public void playDeadSound() {
 		System.out.println("slain");
 		String bip = "sounds/slain.mp3";
 		Media hit = new Media(Paths.get(bip).toUri().toString());
 		MediaPlayer mediaPlayer = new MediaPlayer(hit);
 		mediaPlayer.play();
-	}
+	}*/
 }
