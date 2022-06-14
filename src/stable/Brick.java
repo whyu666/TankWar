@@ -4,9 +4,7 @@ import game.Game;
 import sprite.Sprite;
 
 /**
- * @author billyu
- * brick
- * can be destroyed by missile
+ * Can be destroyed by missile.
  */
 public final class Brick extends Stable {
 	
@@ -19,8 +17,6 @@ public final class Brick extends Stable {
 		case Game.PLAYER_MISSILE_MASK:
 		case Game.ENEMY_MISSILE_MASK:
 			health--;
-			break;
-		default:
 			break;
 		}
 	}

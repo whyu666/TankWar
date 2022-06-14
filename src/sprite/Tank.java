@@ -1,12 +1,11 @@
 package sprite;
-import java.util.ArrayList;
 
+import java.util.ArrayList;
 import game.Game;
 import stable.Grass;
 
 /**
- * @author billyu
- * tank appearance and actions
+ * Tank appearance and actions.
  */
 public abstract class Tank extends Sprite {
 	
@@ -22,7 +21,7 @@ public abstract class Tank extends Sprite {
 	protected Direction missileDirection = getDirection();
 	private long fireTime = System.nanoTime();
 	
-	private ArrayList<Sprite> elements;
+	private final ArrayList<Sprite> elements;
 	
 	public Tank(ArrayList<Sprite> elements) {
 		this.elements = elements;
@@ -133,7 +132,7 @@ public abstract class Tank extends Sprite {
 	public abstract int getMissileMask();
 	
 	/**
-	 * set green color
+	 * Set green color.
 	 */
 	public void setGreen() {
 		TANK_UP = GREEN_TANK_UP;
@@ -143,7 +142,7 @@ public abstract class Tank extends Sprite {
 	}
 	
 	/**
-	 * set red color
+	 * Set red color.
 	 */
 	public void setRed() {
 		TANK_UP = RED_TANK_UP;
@@ -153,7 +152,7 @@ public abstract class Tank extends Sprite {
 	}
 	
 	/**
-	 * set yellow color
+	 * Set yellow color.
 	 */
 	public void setYellow() {
 		TANK_UP = YELLOW_TANK_UP;
@@ -163,7 +162,7 @@ public abstract class Tank extends Sprite {
 	}
 	
 	/**
-	 * set white color
+	 * Set white color.
 	 */
 	public void setWhite() {
 		TANK_UP = WHITE_TANK_UP;

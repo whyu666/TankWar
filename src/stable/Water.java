@@ -3,9 +3,7 @@ package stable;
 import sprite.Sprite;
 
 /**
- * @author billyu
- * missile fly over water
- * tanks cannot get into water
+ * Missile fly over water. & Tanks cannot get into water.
  */
 public class Water extends Stable {
 	

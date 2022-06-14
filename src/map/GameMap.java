@@ -1,6 +1,6 @@
 package map;
-import java.util.ArrayList;
 
+import java.util.ArrayList;
 import sprite.Direction;
 import sprite.EnemyTank;
 import sprite.PlayerTank;
@@ -13,16 +13,14 @@ import stable.Stone;
 import stable.Water;
 
 /**
- * @author billyu
- * game map generator
- * reads data from MapData
- * assumes each map contains info of brick, stone, water, grass, player pos, enemy pos
+ * game map generator:
+ * Reads data from MapData. & Assumes each map contains info of brick, stone, water, grass, player pos, enemy pos.
  */
 public class GameMap {
 	private static final double SPAWN_POS = 0.0025;
 	protected static final int unitSize = 20;
 
-	private int width, height;
+	private final int width, height;
 	private ArrayList<Sprite> elements;
 	private PlayerTank playerTank;
 	private MapData data;
@@ -39,7 +37,7 @@ public class GameMap {
 	}
 	
 	/**
-	 * construct the map
+	 * Construct the map.
 	 */
 	public void buildMap(int level) {
 		pad();
@@ -47,7 +45,7 @@ public class GameMap {
 	}
 	
 	/**
-	 * spawn enemy tanks randomly
+	 * Spawn enemy tanks randomly.
 	 */
 	public void spawnTank() {
 		for (int[] pos: currentMap.tankPos) {
@@ -80,7 +78,7 @@ public class GameMap {
 	}
 
 	private void pad() {
-		double x = 0, y = 0;
+		double x, y;
 		x = -unitSize;
 		for (y = 0; y <= height; y += unitSize) {
 			addPadding(x, y);
@@ -129,12 +127,11 @@ public class GameMap {
 				for (int q = y; q <= y + chunkHeight - unitSize; q += unitSize) {
 					Stable e = null;
 					try {
-						e = (Stable) cls.newInstance();
-					} catch (InstantiationException e1) {
-						e1.printStackTrace();
-					} catch (IllegalAccessException e1) {
+						e = cls.newInstance();
+					} catch (InstantiationException | IllegalAccessException e1) {
 						e1.printStackTrace();
 					}
+					assert e != null;
 					e.setPosition(p, q);
 					elements.add(e);
 				}

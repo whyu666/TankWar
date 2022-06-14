@@ -1,6 +1,6 @@
 package game;
-import java.util.ArrayList;
 
+import java.util.ArrayList;
 import javafx.scene.Scene;
 import javafx.scene.canvas.*;
 import javafx.scene.input.KeyCode;
@@ -15,13 +15,11 @@ import stable.Home;
 import ui.GameHud;
 
 /**
- * Separate the game code from some of the boilerplate code.
- * 
- * @author Bill Yu
+ * Separate the game code from some boilerplate code.
  */
 
 enum Status {
-	Wait, Play, Lost, Win, ToLose, Between;
+	Wait, Play, Lost, Win, ToLose, Between
 }
 
 public class Game {
@@ -43,7 +41,6 @@ public class Game {
 	private static final int INITIAL_LIVES = 3;
 	private static final int SCORE_UNIT = 100;
 
-	private Scene myScene;
 	private GraphicsContext gc;
 	private PlayerTank playerTank;
 	private int width, height;
@@ -56,23 +53,23 @@ public class Game {
 	private static final long GAME_TIME = GAME_TIME_SECONDS * 1000000000L;
 	private long startTime = System.nanoTime();
 
-	private ArrayList<Sprite> elements = new ArrayList<Sprite>();
+	private ArrayList<Sprite> elements = new ArrayList<>();
 
 	/**
-	 * Returns name of the game.
+	 *  Return name of the game.
 	 */
 	public String getTitle () {
 		return TITLE;
 	}
 
 	/**
-	 * Create the game's scene
+	 * Create the game's scene.
 	 */
-	public Scene init (int width, int height) {
+	public Scene init(int width, int height) {
 		status = Status.Play;
 		this.width = width;
 		this.height = height;
-		elements = new ArrayList<Sprite>();
+		elements = new ArrayList<>();
 		startTime = System.nanoTime();
 		lives = INITIAL_LIVES;
 		score = 0;
@@ -91,7 +88,7 @@ public class Game {
 		
 		gc = initGraphicsContext(root);
 
-		myScene = new Scene(root, width, height + hudManager.getHeight(), Color.BLACK);
+		Scene myScene = new Scene(root, width, height + hudManager.getHeight(), Color.BLACK);
 		// Respond to input
 		myScene.setOnKeyPressed(e -> handleKeyInput(e.getCode()));
 		return myScene;
@@ -226,17 +223,19 @@ public class Game {
 			for (int j = i + 1; j < elements.size(); j++) {
 				Sprite e1 = elements.get(i);
 				Sprite e2 = elements.get(j);
-				if (!e1.intersects(e2)) continue;
+				if (!e1.intersects(e2)) {
+					continue;
+				}
 				if ((e1.getBITMASK() & e2.getBITMASK()) != 0) {
-					e1.handleCollision(e2);;
-					e2.handleCollision(e1);;
+					e1.handleCollision(e2);
+					e2.handleCollision(e1);
 				}
 			}
 		}
 	}
 
 	/**
-	 * cheat: clear all enemy tanks currently on map
+	 * cheat: Clear all enemy tanks currently on map.
 	 */
 	public void clearEnemies() {
 		for (int i = 0; i < elements.size(); i++) {

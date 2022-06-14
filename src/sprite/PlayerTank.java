@@ -1,19 +1,17 @@
 package sprite;
+
 import java.nio.file.Paths;
 import java.util.ArrayList;
-
 import game.Game;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
 /**
- * @author billyu
- * controlled by the player
- * fire missile, move around and benefit from buffs
+ * controlled by the player: Fire missile, move around and benefit from buffs.
  */
 public class PlayerTank extends Tank {
 	
-	private static final long IMMORTAL_DELAY = 5000*1000*100;
+	private static final long IMMORTAL_DELAY = 5000 * 1000 * 100;
 	private long immortalStartTime = System.nanoTime();
 	
 	public PlayerTank(ArrayList<Sprite> elements) {

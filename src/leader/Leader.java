@@ -1,12 +1,9 @@
-// This entire file is part of my masterpiece.
-// Bill Yu
-
 package leader;
+
 import java.io.Serializable;
 
 /**
- * @author billyu
- * player on the leader board
+ * Player on the leader board.
  */
 public class Leader implements Comparable<Leader>, Serializable {
 	private static final long serialVersionUID = 1L;

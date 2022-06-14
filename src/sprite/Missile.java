@@ -4,8 +4,7 @@ import stable.Grass;
 import stable.Water;
 
 /**
- * @author billyu
- * fired by tank, but exist even after tanks die
+ * Fired by tank, but exist even after tanks die.
  */
 public class Missile extends Sprite {
 	private static final String MISSILE_UP = "missile-up.gif";
@@ -37,14 +36,11 @@ public class Missile extends Sprite {
 				velocityX = SPEED;
 				velocityY = 0;
 				break;
-			default:
-				//error
-				break;
 		}
 	}
 	
 	protected void dealWithCollision(Sprite s) {
-		if (!(s instanceof Water || s instanceof Grass) || s instanceof Missile) {
+		if (!(s instanceof Water || s instanceof Grass)) {
 			health = 0;
 		}
 	}

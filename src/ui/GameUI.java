@@ -1,4 +1,5 @@
 package ui;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -12,19 +13,16 @@ import leader.Leader;
 import leader.LeaderBoard;
 
 /**
- * @author billyu
- * common buttons reused across scenes
+ * Common buttons reused across scenes.
  */
 public class GameUI {
-	private EventHandler<ActionEvent> gameStart;
-	private EventHandler<ActionEvent> showLeaders;
-	private EventHandler<ActionEvent> gameExit;
+	private final EventHandler<ActionEvent> gameStart;
+	private final EventHandler<ActionEvent> showLeaders;
+	private final EventHandler<ActionEvent> gameExit;
 	private boolean didInputName;
 	private LeaderBoard board;
 	
-	public GameUI(EventHandler<ActionEvent> start,
-			EventHandler<ActionEvent> leaders,
-			EventHandler<ActionEvent> exit) {
+	public GameUI(EventHandler<ActionEvent> start, EventHandler<ActionEvent> leaders, EventHandler<ActionEvent> exit) {
 		gameStart = start;
 		showLeaders = leaders;
 		gameExit = exit;
@@ -33,7 +31,7 @@ public class GameUI {
 	}
 	
 	/**
-	 * refresh the states
+	 * Refresh the states.
 	 */
 	public void refreshGame() {
 		didInputName = false;
@@ -85,19 +83,17 @@ public class GameUI {
     	Label prompt = new Label("Name:");
     	TextField input = new TextField();
     	Button confirm = new Button("OK");
-    	confirm.setOnAction(new EventHandler<ActionEvent>() {
-    		public void handle(ActionEvent event) {
-    			if (didInputName) {
-    				indicator.setText("You've already put your name in!");
-    				return;
-    			}
-    			didInputName = true;
-    			Leader l = new Leader(input.getText(), score);
-    			getBoard().putOn(l);
-    			getBoard().save();
-    			indicator.setText("Succeeded!");
-    		}
-    	});
+    	confirm.setOnAction(event -> {
+			if (didInputName) {
+				indicator.setText("You've already put your name in!");
+				return;
+			}
+			didInputName = true;
+			Leader l = new Leader(input.getText(), score);
+			getBoard().putOn(l);
+			getBoard().save();
+			indicator.setText("Succeeded!");
+		});
     	box.getChildren().addAll(prompt, input, confirm);
     	whole.getChildren().addAll(indicator, box);
     	return whole;

@@ -1,6 +1,6 @@
 package ui;
-import java.util.ArrayList;
 
+import java.util.ArrayList;
 import game.Game;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -17,8 +17,7 @@ import javafx.scene.text.TextAlignment;
 import leader.Leader;
 
 /**
- * @author billyu
- * scene to display the leader board
+ * Scene to display the leader board.
  */
 public class LeadersScene extends GameScene {
 	
@@ -39,8 +38,7 @@ public class LeadersScene extends GameScene {
     	root.setTop(title);
     	root.setCenter(leaders);
     	BorderPane.setAlignment(title, Pos.CENTER);
-    	Scene scn = new Scene(root, SIZE, SIZE);
-    	return scn;
+		return new Scene(root, SIZE, SIZE);
     }
     
     /**

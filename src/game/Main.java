@@ -14,7 +14,9 @@ import ui.SoundManager;
 import ui.StartScene;
 import ui.WinScene;
 
-/** This is the main program, it is basically boilerplate to create an animated scene. */
+/**
+ * This is the main program, it is basically boilerplate to create an animated scene.
+ */
 
 public class Main extends Application {
     private static final int SIZE = 680;
@@ -48,8 +50,9 @@ public class Main extends Application {
 		}
     }
 
-    /** Set things up at the beginning. */
-
+    /**
+     * Set things up at the beginning.
+     */
     @Override
     public void start (Stage s) {
     	this.stage = s;
@@ -60,7 +63,9 @@ public class Main extends Application {
     	stage.show();
     }
     
-    /** start the game play */
+    /**
+     * Start the game play.
+     */
     private void gameStart() {
     	// create your own game here
         myGame = new Game();
@@ -72,15 +77,16 @@ public class Main extends Application {
         stage.setScene(gameScene);
 
         // sets the game's loop
-        frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY),
-                                      e -> step(SECOND_DELAY));
+        frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY), e -> step());
         animation = new Timeline();
         animation.setCycleCount(Timeline.INDEFINITE);
         animation.getKeyFrames().add(frame);
         animation.play();
     }
     
-    /** the player wins */
+    /**
+     * The player wins.
+     */
     public void gameWin() {
     	soundManager.playVictory();
     	Scene winScene = new WinScene(uiManager, SIZE, myGame).initScene();
@@ -88,7 +94,9 @@ public class Main extends Application {
     	clearGame();
     }
     
-    /** set the scene with game over scene */
+    /**
+     * Set the scene with game over scene.
+     */
     public void gameOver() {
     	soundManager.playDefeat();
     	Scene overScene = new OverScene(uiManager, SIZE, myGame).initScene();
@@ -97,7 +105,7 @@ public class Main extends Application {
     }
     
     /**
-     * set the stage with leaders scene
+     * Set the stage with leaders scene.
      */
     public void showLeaders() {
     	Scene leadersScene = new LeadersScene(uiManager, SIZE, myGame).initScene();
@@ -105,11 +113,10 @@ public class Main extends Application {
     }
     
     /**
-     * check the game status and let the game run
-     * @param elapsedTime time passed
+     * Check the game status and let the game run.
      */
-    private void step(double elapsedTime) {
-    	switch (myGame.getStatus()) {
+    private void step() {
+    	switch(myGame.getStatus()) {
     		case Lost:
     			gameOver();
     			return;
@@ -119,27 +126,28 @@ public class Main extends Application {
     		default:
     			break;
     	}
-    	myGame.step(elapsedTime);
+    	myGame.step(Main.SECOND_DELAY);
     }
     
     /**
-     * show the stage the first time
+     * Show the stage the first time.
      * @param startScene the first scene that welcomes players
      */
     private void configureStage(Scene startScene) {
-    	stage.setTitle("Tank Battle");
+    	stage.setTitle("TankWar");
     	stage.setScene(startScene);
     	stage.setResizable(false);
     }
     
     /**
-     * clear the game instance and stop animation
+     * Clear the game instance and stop animation.
      */
     private void clearGame() {
     	myGame = null;
     	frame = null;
-    	if (animation != null)
-    		animation.stop();
+    	if(animation != null) {
+            animation.stop();
+        }
     	animation = null;
     }
 

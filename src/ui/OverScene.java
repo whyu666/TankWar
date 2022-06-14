@@ -1,4 +1,5 @@
 package ui;
+
 import game.Game;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -8,8 +9,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 
 /**
- * @author billyu
- * game over scene
+ * Game over scene.
  */
 public class OverScene extends GameScene {
 	
@@ -33,7 +33,6 @@ public class OverScene extends GameScene {
     		root.getChildren().add(uiManager.initNameInput(score));
     	}
     	root.getChildren().addAll(startButton, leadersButton, exitButton);
-    	Scene overScene = new Scene(root, SIZE, SIZE);
-    	return overScene;
+		return new Scene(root, SIZE, SIZE);
     }
 }

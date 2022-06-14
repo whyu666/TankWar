@@ -1,12 +1,10 @@
 package sprite;
-import java.util.ArrayList;
 
+import java.util.ArrayList;
 import game.Game;
 
 /**
- * @author billyu
- * enemy tank actions
- * fire missile and change direction randomly
+ * Enemy tank actions: Fire missile and change direction randomly.
  */
 public class EnemyTank extends Tank {
 	
@@ -20,9 +18,8 @@ public class EnemyTank extends Tank {
 		SPEED = 100;
 	}
 	
-	/* 
-	 * change direction at random
-	 * fire missile at random
+	/**
+	 * Change direction at random. & Fire missile at random.
 	 */
 	public void update(double time) {
 		super.update(time);

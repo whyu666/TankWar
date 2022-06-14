@@ -1,17 +1,16 @@
 package map;
+
 import java.util.ArrayList;
 
 /**
- * @author billyu
- * stores the map data in code
- * in the future could read from file
+ * Stores the map data in code in the future could read from file.
  */
 public class MapData {
 	
-	private ArrayList<Map> maps;
+	private final ArrayList<Map> maps;
 
 	public MapData() {
-		maps = new ArrayList<Map>();
+		maps = new ArrayList<>();
 		initMapData();
 	}
 	

@@ -10,14 +10,13 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 /**
- * @author billyu
- * in game info display
+ * In game info display.
  */
 public class GameHud {
 	private Text timeHud;
 	private Text livesHud;
 	private Text levelHud;
-	private Game myGame;
+	private final Game myGame;
 	
 	public GameHud(Game game) {
 		myGame = game;

@@ -1,4 +1,5 @@
 package ui;
+
 import game.Game;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -8,8 +9,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 
 /**
- * @author billyu
- * scene to let the players know they won
+ * Scene to let the players know they won.
  */
 public class WinScene extends GameScene {
 	
@@ -35,7 +35,6 @@ public class WinScene extends GameScene {
     	Button exitButton = uiManager.initExitButton();
     	
     	root.getChildren().addAll(startButton, leadersButton, exitButton);
-    	Scene winScene = new Scene(root, SIZE, SIZE);
-    	return winScene;
+		return new Scene(root, SIZE, SIZE);
     }
 }

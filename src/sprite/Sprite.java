@@ -1,14 +1,15 @@
 package sprite;
+
 import javafx.scene.image.Image;
 import stable.Grass;
 import stable.Water;
 import javafx.scene.canvas.GraphicsContext;
-
 import javafx.geometry.Rectangle2D;
 
+import java.util.Objects;
+
 /**
- * @author billyu
- * essential class for object movements and collision
+ * Essential class for object movements and collision.
  */
 public abstract class Sprite implements Comparable<Sprite> {
     private Image image;
@@ -41,7 +42,7 @@ public abstract class Sprite implements Comparable<Sprite> {
     }
 
     public void setImage(String filename) {
-        Image i = new Image(getClass().getClassLoader().getResourceAsStream(filename));
+        Image i = new Image(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream(filename)));
         setImage(i);
     }
 
@@ -80,7 +81,7 @@ public abstract class Sprite implements Comparable<Sprite> {
     }
 
     public Rectangle2D getRect() {
-        return new Rectangle2D(positionX,positionY,width,height);
+        return new Rectangle2D(positionX, positionY, width, height);
     }
 
     public boolean intersects(Sprite s) {
@@ -89,7 +90,7 @@ public abstract class Sprite implements Comparable<Sprite> {
     
     /**
      * @param s another sprite collided
-     * handle collision with another sprite
+     * Handle collision with another sprite.
      */
     public void handleCollision(Sprite s) {
     	dealWithCollision(s);
@@ -100,7 +101,7 @@ public abstract class Sprite implements Comparable<Sprite> {
     
     /**
      * @param s another sprite collided
-     * function to be overridden
+     * Function to be overridden.
      */
     protected abstract void dealWithCollision(Sprite s);
     

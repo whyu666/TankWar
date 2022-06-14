@@ -1,4 +1,5 @@
 package ui;
+
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -12,8 +13,7 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 
 /**
- * @author billyu
- * welcome scene of the game
+ * Welcome scene of the game.
  */
 public class StartScene extends GameScene {
 	
@@ -64,7 +64,6 @@ public class StartScene extends GameScene {
     	root.setTop(title);
     	root.setCenter(startViewButtons);
     	BorderPane.setAlignment(title, Pos.CENTER);
-    	Scene scn = new Scene(root, SIZE, SIZE);
-    	return scn;
+		return new Scene(root, SIZE, SIZE);
     }
 }
