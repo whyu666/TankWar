@@ -99,14 +99,14 @@ public class GameUI {
     	Button confirm = new Button("确认");
     	confirm.setOnAction(event -> {
 			if (didInputName) {
-				indicator.setText("You've already put your name in!");
+				indicator.setText("成绩已经保存到排行榜中");
 				return;
 			}
 			didInputName = true;
 			Leader l = new Leader(input.getText(), score);
 			getBoard().putOn(l);
 			getBoard().save();
-			indicator.setText("Succeeded!");
+			indicator.setText("成功添加");
 		});
     	box.getChildren().addAll(prompt, input, confirm);
     	whole.getChildren().addAll(indicator, box);
