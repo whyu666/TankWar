@@ -69,3 +69,4 @@ CHD 2022 curriculum design - Integrated Practice of Basic Skills of Software Eng
 
 ## 版本更新说明：
 ### 0.1 最初始版本，该版本实现了包括欢迎页面，坦克大战基本功能（使用已经设计好的地图、家的设计、敌人的设计、关卡的设计），输赢界面，排行榜，作弊处理等
+### 0.2 在排行榜、输赢界面增加了返回主界面按钮

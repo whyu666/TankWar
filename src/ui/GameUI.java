@@ -19,13 +19,20 @@ public class GameUI {
 	private final EventHandler<ActionEvent> gameStart;
 	private final EventHandler<ActionEvent> showLeaders;
 	private final EventHandler<ActionEvent> gameExit;
+
+	private final EventHandler<ActionEvent> gameReturn;
+
 	private boolean didInputName;
 	private LeaderBoard board;
 	
-	public GameUI(EventHandler<ActionEvent> start, EventHandler<ActionEvent> leaders, EventHandler<ActionEvent> exit) {
+	public GameUI(EventHandler<ActionEvent> start, EventHandler<ActionEvent> leaders, EventHandler<ActionEvent> exit, EventHandler<ActionEvent> ret) {
 		gameStart = start;
 		showLeaders = leaders;
 		gameExit = exit;
+
+		//将返回主菜单键加入到GameUI中
+		gameReturn = ret;
+
 		refreshGame();
 		setBoard(new LeaderBoard());
 	}
@@ -54,6 +61,13 @@ public class GameUI {
 		Button leadersButton = new Button("排行榜");
 		leadersButton.setPrefWidth(120);
 		leadersButton.setOnAction(showLeaders);
+		return leadersButton;
+	}
+
+	public Button initReturnButton() {
+		Button leadersButton = new Button("返回主界面");
+		leadersButton.setPrefWidth(120);
+		leadersButton.setOnAction(gameReturn);
 		return leadersButton;
 	}
 

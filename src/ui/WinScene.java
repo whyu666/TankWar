@@ -32,9 +32,10 @@ public class WinScene extends GameScene {
     	Button startButton = uiManager.initStartButton();
     	Button leadersButton = uiManager.initLeadersButton();
     	startButton.setText("再玩一次");
+		Button returnButton = uiManager.initReturnButton();
     	Button exitButton = uiManager.initExitButton();
     	
-    	root.getChildren().addAll(startButton, leadersButton, exitButton);
+    	root.getChildren().addAll(startButton, leadersButton, returnButton, exitButton);
 		return new Scene(root, SIZE, SIZE);
     }
 }

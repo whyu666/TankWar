@@ -23,6 +23,7 @@ public class OverScene extends GameScene {
     	Button startButton = uiManager.initStartButton();
     	startButton.setText("再玩一次");
     	Button leadersButton = uiManager.initLeadersButton();
+		Button returnButton = uiManager.initReturnButton();
     	Button exitButton = uiManager.initExitButton();
     	VBox root = new VBox();
     	root.setSpacing(60);
@@ -32,7 +33,7 @@ public class OverScene extends GameScene {
     	if (uiManager.getBoard().canGetOn(score)) {
     		root.getChildren().add(uiManager.initNameInput(score));
     	}
-    	root.getChildren().addAll(startButton, leadersButton, exitButton);
+    	root.getChildren().addAll(startButton, leadersButton, returnButton, exitButton);
 		return new Scene(root, SIZE, SIZE);
     }
 }

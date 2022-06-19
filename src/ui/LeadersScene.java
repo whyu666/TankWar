@@ -47,15 +47,18 @@ public class LeadersScene extends GameScene {
     private Node initLeadersView() {
     	VBox box = new VBox();
     	box.setPadding(new Insets(15, 12, 15, 12));
-        box.setSpacing(40);
+        box.setSpacing(30);
     	
         ArrayList<Leader> leaders = uiManager.getBoard().getLeaders();
         Button startButton = uiManager.initStartButton();
         startButton.setText("再玩一次");
         Button exitButton = uiManager.initExitButton();
+
+		//在排行榜中添加ReturnButton
+		Button returnButton = uiManager.initReturnButton();
         
         Node leadersBox = initLeadersBox(leaders);
-    	box.getChildren().addAll(leadersBox, startButton, exitButton);
+    	box.getChildren().addAll(leadersBox, startButton, returnButton, exitButton);
     	box.setAlignment(Pos.CENTER);
     	return box;
     }

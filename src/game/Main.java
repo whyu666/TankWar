@@ -50,6 +50,13 @@ public class Main extends Application {
 		}
     }
 
+    //增加返回主界面动作
+    class GameReturn implements EventHandler<ActionEvent> {
+        public void handle(ActionEvent event) {
+            returnGame();
+        }
+    }
+
     /**
      * Set things up at the beginning.
      */
@@ -57,7 +64,10 @@ public class Main extends Application {
     public void start (Stage s) {
     	this.stage = s;
     	soundManager = new SoundManager();
-    	uiManager = new GameUI(new GameStart(), new ShowLeaders(), new GameExit());
+
+        //GameUI初始化过程加入返回主菜单键
+    	uiManager = new GameUI(new GameStart(), new ShowLeaders(), new GameExit(), new GameReturn());
+
     	Scene startScene = new StartScene(uiManager, SIZE).initScene();
     	configureStage(startScene);
     	stage.show();
@@ -110,6 +120,12 @@ public class Main extends Application {
     public void showLeaders() {
     	Scene leadersScene = new LeadersScene(uiManager, SIZE, myGame).initScene();
     	stage.setScene(leadersScene);
+    }
+
+    //增加返回主界面函数
+    public void returnGame() {
+        Scene startScene = new StartScene(uiManager, SIZE).initScene();
+        stage.setScene(startScene);
     }
     
     /**
