@@ -161,7 +161,7 @@ public class Game {
 			status = Status.Win;
 			return;
 		}
-		elements.removeAll(elements);
+		elements.clear();
 		startTime = System.nanoTime();
 		map.buildMap(currentLevel);
 		playerTank = map.getPlayerTank();
