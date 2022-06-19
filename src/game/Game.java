@@ -31,7 +31,7 @@ public class Game {
 	private static final long LOSE_DELAY = 500 * 1000000;
 
 	private long deadTime = System.nanoTime();
-	private static final long DIE_DELAY = 1 * 1000000000L;
+	private static final long DIE_DELAY = 1000000000L;
 
 	private long passLevelTime = System.nanoTime();
 	private static final long LEVEL_DELAY = 3 * 1000000000L;
@@ -313,10 +313,11 @@ public class Game {
 		}
 	}
 
+	//一个关卡成功后，显示该界面
 	private void showScore() {
 		gc.setFill(Color.WHITE);
 		gc.setFont(new Font(20));
-		gc.fillText("Current Score: " + getScore(), width / 2 - 80, height / 2);
+		gc.fillText("当前分数: " + getScore(), (float)width / 2 - 80, (float)height / 2);
 	}
 
 	private void setBetween() {
