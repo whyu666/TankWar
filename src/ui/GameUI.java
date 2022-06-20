@@ -1,5 +1,9 @@
 package ui;
 
+//游戏ui管理器
+//包含公共元素和逻辑
+//eventhandler来自main函数中的初始化
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -11,6 +15,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import leader.Leader;
 import leader.LeaderBoard;
+import misc.LengthLimitedTextField;
 
 public class GameUI {
 
@@ -72,7 +77,8 @@ public class GameUI {
     	box.setPadding(new Insets(15, 12, 15, 12));
     	box.setSpacing(20);
     	Label prompt = new Label("姓名:");
-    	TextField input = new TextField();
+		//排行榜排版解决：仅接受前10个字
+    	TextField input = new LengthLimitedTextField(10);
     	Button confirm = new Button("确认");
     	confirm.setOnAction(event -> {
 			if (didInputName) {
@@ -80,7 +86,8 @@ public class GameUI {
 				return;
 			}
 			didInputName = true;
-			Leader l = new Leader(input.getText(), score);
+			String name = input.getText();
+			Leader l = new Leader(name, score);
 			getBoard().putOn(l);
 			getBoard().save();
 			indicator.setText("成功添加");
