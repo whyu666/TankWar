@@ -3,11 +3,8 @@ package stable;
 import sprite.Missile;
 import sprite.Sprite;
 
-/**
- * Home of the player, if this dies, game over.
- */
 public class Home extends Stable {
-	
+
 	public Home() {
 		super();
 	}

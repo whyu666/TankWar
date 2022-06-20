@@ -5,22 +5,20 @@ import javafx.scene.image.Image;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.geometry.Rectangle2D;
 
-/**
- * Essential class for object movements and collision.
- */
 public abstract class Sprite implements Comparable<Sprite> {
-    private Image image;            //图像
-    private boolean alive;          //是否存活
-    protected double positionX;     //x坐标
-    protected double positionY;     //y坐标
-    protected double lastX;
-    protected double lastY;
-    protected double velocityX;     //沿x方向的速度
-    protected double velocityY;     //沿y方向的速度
-    protected double width;         //长度
-    protected double height;        //宽度
-    protected int BITMASK;
-    protected int health;           //生命值
+
+    private Image image;  //图像
+    private boolean alive;  //是否存活
+    protected double positionX;  //x坐标
+    protected double positionY;  //y坐标
+    protected double lastX;  //最后的x坐标
+    protected double lastY;  //最后的y坐标
+    protected double velocityX;  //沿x方向的速度
+    protected double velocityY;  //沿y方向的速度
+    protected double width;  //长度
+    protected double height;  //宽度
+    protected int BITMASK;  //识别码（二进制）
+    protected int health;  //生命值
 
     public Sprite() {
         alive = true;
@@ -70,7 +68,7 @@ public abstract class Sprite implements Comparable<Sprite> {
     	return height;
     }
 
-    public void update(double time) {
+    public void update(double time) {  //根据时间，进行更新操作
     	lastX = positionX;
         lastY = positionY;
         positionX += velocityX * time;
@@ -82,7 +80,7 @@ public abstract class Sprite implements Comparable<Sprite> {
     	positionY = lastY;
     }
 
-    public void render(GraphicsContext gc) {
+    public void render(GraphicsContext gc) {  //渲染
         gc.drawImage(image, positionX, positionY);
     }
 
@@ -93,11 +91,7 @@ public abstract class Sprite implements Comparable<Sprite> {
     public boolean intersects(Sprite s) {
         return s.getRect().intersects(this.getRect());
     }
-    
-    /**
-     * @param s another sprite collided
-     * Handle collision with another sprite.
-     */
+
     public void handleCollision(Sprite s) {
     	dealWithCollision(s);
     	if (health <= 0) {
@@ -106,10 +100,7 @@ public abstract class Sprite implements Comparable<Sprite> {
     }
 
     protected abstract void dealWithCollision(Sprite s);
-    
-    /**
-     * @return if the sprite is alive
-     */
+
     public boolean isAlive() {
     	return alive;
     }
@@ -119,15 +110,12 @@ public abstract class Sprite implements Comparable<Sprite> {
 		return 0;
 	}
 
-	/**
-	 * @return bitmask of the sprite
-	 */
 	public int getBITMASK() {
 		return BITMASK;
 	}
 
-	public void setBITMASK(int bITMASK) {
-		BITMASK = bITMASK;
+	public void setBITMASK(int bitMASK) {
+		BITMASK = bitMASK;
 	}
 
 	public void setAlive(boolean alive) {

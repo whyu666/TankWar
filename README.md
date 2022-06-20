@@ -1,25 +1,30 @@
 # TankWar
 CHD 2022 curriculum design - Integrated Practice of Basic Skills of Software Engineering
 
-当前readme文档不够完善，后期再做调整，参考：https://www.jianshu.com/p/813b70d5b0de
-
-> 开源许可协议：MIT License
-
-编译运行：需选择SDK为Java1.8，设置项目语言级别为8，在IDEA的项目结构中设置src为源，设置images和sounds为资源，运行game.Main启动游戏
-
 ---
 
 编写程序时注意：
-- 新增的变量和函数，在此文档中说明（添加到程序扩展结构部分），修改README文档时，请使用规范的Markdown语言，具体参考：[Markdown官方教程](https://markdown.com.cn/basic-syntax/)
+- 新增的类，在此文档项目结构中说明，修改README文档时，使用Markdown语言，具体参考：[Markdown官方教程](https://markdown.com.cn/basic-syntax/)
 - 注意程序书写规范，包括括号位置、变量名函数名声明方式请保持和原程序一致
 - 建议直接使用IDEA的推送功能，如果无法使用，也可使用Github网页、客户端、命令行完成推送
 - 每次推送代码时，***请写清修改、增加内容***
-- 有任何想法、问题，可以在Discussion中提出
 - ......
 
 ---
 
-## 程序基本结构：
+项目介绍：
+TankWar是基于JavaFX开发的一款坦克大战小游戏
+> 开源许可协议：MIT License
+
+---
+
+运行方法：
+- 编译运行：在IDE中选择SDK为Java1.8，设置项目语言级别为8，在项目结构中设置src为源，设置images和sounds为资源，运行game.Main启动游戏  
+- 直接运行：在配置好Java环境后，直接下载Release中的TankWar.jar运行
+
+---
+
+## 项目结构：
 ### (1) stable：游戏中不动的元素
 - Stable：抽象类，不动元素共有属性
 - 砖块Brick：可以被坦克摧毁
@@ -30,8 +35,8 @@ CHD 2022 curriculum design - Integrated Practice of Basic Skills of Software Eng
 
 ### (2) ui：界面设计
 - GameScene：抽象类，界面设计的共有属性
-- GameHud：
-- GameUI：游戏界面
+- GameHud：游戏生命值、时间、关卡界面
+- GameUI：游戏主界面
 - LeadersScene：排行榜界面
 - OverScene：游戏失败界面
 - SoundManager：播放对应的音乐
@@ -39,6 +44,8 @@ CHD 2022 curriculum design - Integrated Practice of Basic Skills of Software Eng
 - WinScene：游戏胜利界面
 
 ### (3) leaderboard：排行榜
+- Leader：存储leaders的属性
+- LeaderBoard：实现排行榜功能
 
 ### (4) sprite：可移动的元素
 - Sprite：抽象类，可移动元素的共有属性
@@ -53,22 +60,24 @@ CHD 2022 curriculum design - Integrated Practice of Basic Skills of Software Eng
 - Map：地图属性
 - MapData：地图数据（关卡）
 
-### (6) game：游戏初始化
-
----
-
-## 程序扩展结构：
-
-### (1) 
-
-
-### (2)
-
+### (6) game：游戏核心部分
+- Game：游戏核心
+- Status：游戏运行状态
+- Main：游戏主程序，由此启动游戏
 
 ---
 
 ## 版本更新说明：
-### ver0.1 最初始版本，该版本实现了包括欢迎页面，坦克大战基本功能（使用已经设计好的地图、家的设计、敌人的设计、关卡的设计），输赢界面，排行榜，作弊处理等
-### ver0.2 
+### ver0.1 初始版本
+- 欢迎页面
+- 使用已经设计好的地图进行游戏
+- 游戏中家、敌人和关卡的设计
+- 输赢界面
+- 排行榜
+- 作弊处理
+### ver0.2 改进版本
 - 在排行榜、输赢界面增加了返回主界面按钮
 - 在主界面增加作弊方法的说明
+- 修改了人机对战模块，使其追踪玩家
+### ver0.3
+- 

@@ -2,9 +2,6 @@ package stable;
 
 import sprite.Sprite;
 
-/**
- * Cannot be destroyed whatsoever.
- */
 public final class Stone extends Stable {
 	
 	public Stone() {

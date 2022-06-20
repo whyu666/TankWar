@@ -19,16 +19,17 @@ enum Status {  //游戏运行状态
 }
 
 public class Game {
+
 	private static final String TITLE = "保卫你的家";
 	private Status status = Status.Wait;
 	private int currentLevel = 0;
 
 	private long toLoseTime = System.nanoTime();
-	private static final long LOSE_DELAY = 5 * 100000000L;
+	private static final long LOSE_DELAY = 500 * 1000000L;
 	private long deadTime = System.nanoTime();
-	private static final long DIE_DELAY = 2 * 1000000000L;		//玩家坦克阵亡后延时一段时间
+	private static final long DIE_DELAY = 200 * 1000000L;  //玩家坦克阵亡后延时一段时间
 	private long passLevelTime = System.nanoTime();
-	private static final long LEVEL_DELAY = 3 * 1000000000L;	//关卡结束后延时一段时间
+	private static final long LEVEL_DELAY = 3000 * 1000000L;  //关卡结束后延时一段时间
 
 	private int lives;
 	private int score;
@@ -42,7 +43,7 @@ public class Game {
 	private int numLevels;
 	private GameHud hudManager;
 
-	public static final long GAME_TIME_SECONDS = 30;	//每一关游戏时间
+	public static final long GAME_TIME_SECONDS = 30;  //每一关游戏时间
 	private static final long GAME_TIME = GAME_TIME_SECONDS * 1000000000L;
 	private long startTime = System.nanoTime();
 
@@ -111,11 +112,11 @@ public class Game {
 			status = Status.Lost;
 			return;
 		}
-		updateElements(elapsedTime);	//更新元素、状态、得分
-		detectCollisions();				//判断是否摧毁元素
-		renderElements();				//渲染对象
-		hudManager.updateHud();			//更新生命、时间、关卡信息
-		map.spawnTank();				//生成敌方坦克
+		updateElements(elapsedTime);  //更新元素、状态、得分
+		detectCollisions();  //判断是否摧毁元素
+		renderElements();  //渲染对象
+		hudManager.updateHud();  //更新生命、时间、关卡信息
+		map.spawnTank();  //生成敌方坦克
 	}
 
 	public void setToLose() {
@@ -149,43 +150,43 @@ public class Game {
 			return;
 		}
 		switch (code) {
-		case SPACE:
-			playerTank.fireMissile();
-			break;
-		case RIGHT:
-		case D:
-			playerTank.setDirection(Direction.RIGHT);
-			playerTankPositionY = playerTank.getPositionY();
-			break;
-		case LEFT:
-		case A:
-			playerTank.setDirection(Direction.LEFT);
-			playerTankPositionY = playerTank.getPositionY();
-			break;
-		case UP:
-		case W:
-			playerTank.setDirection(Direction.UP);
-			playerTankPositionX = playerTank.getPositionY();
-			break;
-		case DOWN:
-		case S:
-			playerTank.setDirection(Direction.DOWN);
-			playerTankPositionX = playerTank.getPositionY();
-			break;
-		case C:
-			clearEnemies();
-			break;
-		case B:
-			playerTank.buffImmortal();
-			break;
-		case L:
-			lives++;
-			break;
-		case N:
-			nextLevel();
-			break;
-		default:
-			break;
+			case SPACE:
+				playerTank.fireMissile();
+				break;
+			case RIGHT:
+			case D:
+				playerTank.setDirection(Direction.RIGHT);
+				playerTankPositionY = playerTank.getPositionY();
+				break;
+			case LEFT:
+			case A:
+				playerTank.setDirection(Direction.LEFT);
+				playerTankPositionY = playerTank.getPositionY();
+				break;
+			case UP:
+			case W:
+				playerTank.setDirection(Direction.UP);
+				playerTankPositionX = playerTank.getPositionY();
+				break;
+			case DOWN:
+			case S:
+				playerTank.setDirection(Direction.DOWN);
+				playerTankPositionX = playerTank.getPositionY();
+				break;
+			case C:
+				clearEnemies();
+				break;
+			case B:
+				playerTank.buffImmortal();
+				break;
+			case L:
+				lives++;
+				break;
+			case N:
+				nextLevel();
+				break;
+			default:
+				break;
 		}
 	}
 
@@ -198,7 +199,7 @@ public class Game {
 					continue;
 				}
 				if ((e1.getBITMASK() & e2.getBITMASK()) != 0) {  //两个element相交，依次判断每一位，至少存在一位同时为1
-					//有以下情况：玩家坦克与敌方子弹和stable类、敌方坦克与玩家子弹和stable类、玩家子弹和stable类、敌方子弹和stable类
+					//有以下情况：玩家坦克与敌方子弹和stable类、敌方坦克与玩家子弹和stable类、玩家子弹与stable类、敌方子弹与stable类
 					//分别使用handleCollision函数进行判断是否摧毁对应元素
 					e1.handleCollision(e2);
 					e2.handleCollision(e1);
@@ -274,7 +275,7 @@ public class Game {
 		}
 	}
 
-	private void showScore() {	//一个关卡成功后，显示该界面
+	private void showScore() {  //一个关卡成功后，显示该界面
 		gc.setFill(Color.WHITE);
 		gc.setFont(new Font(20));
 		gc.fillText("当前分数: " + getScore(), (float)width / 2 - 80, (float)height / 2);
@@ -285,9 +286,9 @@ public class Game {
 		status = Status.Between;
 	}
 
-	public static final int PLAYER_TANK_MASK = 1;		//二进制：0001
-	public static final int ENEMY_TANK_MASK = 3;		//二进制：0010
-	public static final int PLAYER_MISSILE_MASK = 6;	//二进制：0110
-	public static final int ENEMY_MISSILE_MASK = 9;		//二进制：1001
-	public static final int STABLE_MASK = 15;			//二进制：1111
+	public static final int PLAYER_TANK_MASK = 1;     //二进制：0001
+	public static final int ENEMY_TANK_MASK = 3;      //二进制：0010
+	public static final int PLAYER_MISSILE_MASK = 6;  //二进制：0110
+	public static final int ENEMY_MISSILE_MASK = 9;   //二进制：1001
+	public static final int STABLE_MASK = 15;         //二进制：1111
 }

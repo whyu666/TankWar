@@ -2,9 +2,6 @@ package stable;
 
 import sprite.Sprite;
 
-/**
- * Missile fly over water. & Tanks cannot get into water.
- */
 public class Water extends Stable {
 	
 	public Water() {
@@ -18,5 +15,6 @@ public class Water extends Stable {
 
 	@Override
 	protected void dealWithCollision(Sprite s) {
+
 	}
 }

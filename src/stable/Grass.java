@@ -2,9 +2,6 @@ package stable;
 
 import sprite.Sprite;
 
-/**
- * Tanks/Missiles can hide under grass.
- */
 public class Grass extends Stable {
 	
 	public Grass() {
@@ -18,5 +15,6 @@ public class Grass extends Stable {
 
 	@Override
 	protected void dealWithCollision(Sprite s) {
+
 	}
 }

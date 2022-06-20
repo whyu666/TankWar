@@ -1,14 +1,8 @@
 package sprite;
 
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import game.Game;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 
-/**
- * controlled by the player: Fire missile, move around and benefit from buffs.
- */
 public class PlayerTank extends Tank {
 	private static final long IMMORTAL_DELAY = 5 * 1000 * 1000 * 100;  //buff持续时间：5秒
 	private long immortalStartTime = System.nanoTime();  //生成玩家坦克时，记录时间
@@ -56,13 +50,4 @@ public class PlayerTank extends Tank {
 			health--;
 		}
 	}
-
-	//这段代码程序没有使用，deprecated，如果确认无用，后期将删除，同时注意修改import部分。
-	/*public void playDeadSound() {
-		System.out.println("slain");
-		String bip = "sounds/slain.mp3";
-		Media hit = new Media(Paths.get(bip).toUri().toString());
-		MediaPlayer mediaPlayer = new MediaPlayer(hit);
-		mediaPlayer.play();
-	}*/
 }

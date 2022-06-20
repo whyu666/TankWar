@@ -3,15 +3,12 @@ package sprite;
 import stable.Grass;
 import stable.Water;
 
-/**
- * Fired by tank, but exist even after tanks die.
- */
 public class Missile extends Sprite {
 	private static final String MISSILE_UP = "missile-up.gif";
 	private static final String MISSILE_DOWN = "missile-down.gif";
 	private static final String MISSILE_LEFT = "missile-left.gif";
 	private static final String MISSILE_RIGHT = "missile-right.gif";
-	private static final int SPEED = 500;
+	private static final int SPEED = 500;  //子弹速度
 	
 	public Missile(Direction direction, int mask) {
 		BITMASK = mask;

@@ -12,16 +12,12 @@ import javafx.scene.layout.VBox;
 import leader.Leader;
 import leader.LeaderBoard;
 
-/**
- * Common buttons reused across scenes.
- */
 public class GameUI {
+
 	private final EventHandler<ActionEvent> gameStart;
 	private final EventHandler<ActionEvent> showLeaders;
 	private final EventHandler<ActionEvent> gameExit;
-
 	private final EventHandler<ActionEvent> gameReturn;
-
 	private boolean didInputName;
 	private LeaderBoard board;
 	
@@ -29,24 +25,15 @@ public class GameUI {
 		gameStart = start;
 		showLeaders = leaders;
 		gameExit = exit;
-
-		//将返回主菜单键加入到GameUI中
-		gameReturn = ret;
-
+		gameReturn = ret;  //将返回主菜单键加入到GameUI中
 		refreshGame();
 		setBoard(new LeaderBoard());
 	}
-	
-	/**
-	 * Refresh the states.
-	 */
+
 	public void refreshGame() {
 		didInputName = false;
 	}
 
-	/**
-	 * @return button for game start
-	 */
 	public Button initStartButton() {
 		Button startButton = new Button("开始游戏");
 		startButton.setPrefWidth(120);
@@ -54,9 +41,6 @@ public class GameUI {
 		return startButton;
 	}
 
-	/**
-	 * @return button for displaying leader board
-	 */
 	public Button initLeadersButton() {
 		Button leadersButton = new Button("排行榜");
 		leadersButton.setPrefWidth(120);
@@ -71,20 +55,13 @@ public class GameUI {
 		return leadersButton;
 	}
 
-	/**
-	 * @return button to quit game
-	 */
 	public Button initExitButton() {
 		Button exitButton = new Button("退出游戏");
 		exitButton.setPrefWidth(120);
 		exitButton.setOnAction(gameExit);
 		return exitButton;
 	}
-	
-	/**
-	 * @param score player's score after the game finishes
-	 * @return a UI element that let the player input the name
-	 */
+
 	public VBox initNameInput(int score) {
     	VBox whole = new VBox();
     	whole.setAlignment(Pos.CENTER);
@@ -113,16 +90,10 @@ public class GameUI {
     	return whole;
     }
 
-	/**
-	 * @return the leader board object
-	 */
 	public LeaderBoard getBoard() {
 		return board;
 	}
 
-	/**
-	 * @param board leader board object
-	 */
 	private void setBoard(LeaderBoard board) {
 		this.board = board;
 	}

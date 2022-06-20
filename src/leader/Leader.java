@@ -2,12 +2,9 @@ package leader;
 
 import java.io.Serializable;
 
-/**
- * Player on the leader board.
- */
 public class Leader implements Comparable<Leader>, Serializable {
+
 	private static final long serialVersionUID = 1L;
-	
 	private String name;
 	private int score;
 	
@@ -18,8 +15,12 @@ public class Leader implements Comparable<Leader>, Serializable {
 	
 	@Override
 	public int compareTo(Leader o) {
-		if (getScore() > o.getScore()) return -1;
-		else if (getScore() < o.getScore()) return 1;
+		if (getScore() > o.getScore()) {
+			return -1;
+		}
+		else if (getScore() < o.getScore()) {
+			return 1;
+		}
 		return 0;
 	}
 

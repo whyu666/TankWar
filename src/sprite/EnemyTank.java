@@ -4,6 +4,7 @@ import game.Game;
 import java.util.ArrayList;
 
 public class EnemyTank extends Tank {
+
 	private long lastChangeDirection = System.nanoTime();
 	private static final long DIRECTION_DELAY = 1000 * 100000L;	//变换方向时间，单位ms
 	private static final double DIRECTION_CHANGE_POS = 0.1;	//更改方向的概率

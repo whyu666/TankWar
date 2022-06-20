@@ -8,9 +8,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 
-/**
- * Scene to let the players know they won.
- */
 public class WinScene extends GameScene {
 	
 	public WinScene(GameUI manager, int SIZE, Game game) {
@@ -21,7 +18,6 @@ public class WinScene extends GameScene {
     	VBox root = new VBox();
     	root.setSpacing(60);
     	root.setAlignment(Pos.CENTER);
-    	
     	int score = myGame.getScore();
     	Label indicator = new Label("你赢了\n分数: " + score);
     	root.getChildren().add(indicator);
@@ -34,7 +30,6 @@ public class WinScene extends GameScene {
     	startButton.setText("再玩一次");
 		Button returnButton = uiManager.initReturnButton();
     	Button exitButton = uiManager.initExitButton();
-    	
     	root.getChildren().addAll(startButton, leadersButton, returnButton, exitButton);
 		return new Scene(root, SIZE, SIZE);
     }

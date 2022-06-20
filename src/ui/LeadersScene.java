@@ -1,7 +1,7 @@
 package ui;
 
-import java.util.ArrayList;
 import game.Game;
+import java.util.ArrayList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -16,9 +16,6 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import leader.Leader;
 
-/**
- * Scene to display the leader board.
- */
 public class LeadersScene extends GameScene {
 	
 	public LeadersScene(GameUI manager, int SIZE, Game game) {
@@ -26,6 +23,7 @@ public class LeadersScene extends GameScene {
 	}
 	
 	public Scene initScene() {
+
     	BorderPane root = new BorderPane();
     	
     	Node leaders = initLeadersView();
@@ -40,10 +38,7 @@ public class LeadersScene extends GameScene {
     	BorderPane.setAlignment(title, Pos.CENTER);
 		return new Scene(root, SIZE, SIZE);
     }
-    
-    /**
-     * @return leader board ui element
-     */
+
     private Node initLeadersView() {
     	VBox box = new VBox();
     	box.setPadding(new Insets(15, 12, 15, 12));
@@ -53,20 +48,13 @@ public class LeadersScene extends GameScene {
         Button startButton = uiManager.initStartButton();
         startButton.setText("再玩一次");
         Button exitButton = uiManager.initExitButton();
-
-		//在排行榜中添加ReturnButton
-		Button returnButton = uiManager.initReturnButton();
-        
+		Button returnButton = uiManager.initReturnButton();  //在排行榜中添加returnButton
         Node leadersBox = initLeadersBox(leaders);
     	box.getChildren().addAll(leadersBox, startButton, returnButton, exitButton);
     	box.setAlignment(Pos.CENTER);
     	return box;
     }
 
-	/**
-	 * @param leaders arraylist of leaders from LeaderBoard
-	 * @return the leader board content
-	 */
 	private HBox initLeadersBox(ArrayList<Leader> leaders) {
 		HBox leadersBox = new HBox();
         leadersBox.setPadding(new Insets(15, 12, 15, 12));

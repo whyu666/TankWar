@@ -12,11 +12,8 @@ import stable.Stable;
 import stable.Stone;
 import stable.Water;
 
-/**
- * game map generator:
- * Reads data from MapData. & Assumes each map contains info of brick, stone, water, grass, player pos, enemy pos.
- */
 public class GameMap {
+
 	private static final double SPAWN_POS = 0.0025;
 	protected static final int unitSize = 20;
 
@@ -35,18 +32,12 @@ public class GameMap {
 		this.elements = elements;
 		data = new MapData();
 	}
-	
-	/**
-	 * Construct the map.
-	 */
+
 	public void buildMap(int level) {
 		pad();
 		createMap(level);
 	}
-	
-	/**
-	 * Spawn enemy tanks randomly.
-	 */
+
 	public void spawnTank() {
 		for (int[] pos: currentMap.tankPos) {
 			if (Math.random() < SPAWN_POS) {

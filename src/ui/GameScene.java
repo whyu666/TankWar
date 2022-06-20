@@ -3,10 +3,8 @@ package ui;
 import game.Game;
 import javafx.scene.Scene;
 
-/**
- * Generate scene needed.
- */
 public abstract class GameScene {
+
 	protected GameUI uiManager;
 	protected final int SIZE;
 	protected Game myGame;
@@ -20,9 +18,6 @@ public abstract class GameScene {
 		this(manager, SIZE);
 		myGame = game;
 	}
-	
-	/**
-	 * @return the scene of the class
-	 */
+
 	public abstract Scene initScene();
 }

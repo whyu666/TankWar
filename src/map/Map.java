@@ -1,14 +1,11 @@
 package map;
 
-/**
- * Hold data for map.
- */
 public class Map {
+
 	public int[][] tankPos, brickPos, stonePos, waterPos, grassPos;
 	public int[] homePos, playerPos;
 
-	public Map(int[][] tankPos, int[][] brickPos, int[][] stonePos, int[][] waterPos, int[][] grassPos,
-			int[] homePos, int[] playerPos) {
+	public Map(int[][] tankPos, int[][] brickPos, int[][] stonePos, int[][] waterPos, int[][] grassPos, int[] homePos, int[] playerPos) {
 		this.tankPos = tankPos;
 		this.brickPos = brickPos;
 		this.stonePos = stonePos;
