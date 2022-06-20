@@ -1,7 +1,7 @@
 package sprite;
 
-import java.util.ArrayList;
 import game.Game;
+import java.util.ArrayList;
 import stable.Grass;
 
 /**
@@ -106,12 +106,9 @@ public abstract class Tank extends Sprite {
 			case RIGHT:
 				missile.setPosition(positionX + width, positionY + 0.5 * height - 0.5 * missile.height);
 				break;
-			default:
-				//error
-				break;
 		}
 		fireTime = time;
-		if (missile != null) elements.add(missile);
+		elements.add(missile);
 		return missile;
 	}
 	

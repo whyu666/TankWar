@@ -1,26 +1,19 @@
 package sprite;
 
-import java.util.ArrayList;
 import game.Game;
+import java.util.ArrayList;
 
-/**
- * Enemy tank actions: Fire missile and change direction randomly.
- */
 public class EnemyTank extends Tank {
-	
 	private long lastChangeDirection = System.nanoTime();
-	private static final long DIRECTION_DELAY = 500000000;
-	private static final double DIRECTION_CHANGE_POS = 0.02;
-	private static final double FIRE_MISSILE_POS = 0.02;
+	private static final long DIRECTION_DELAY = 1000 * 100000L;	//变换方向时间，单位ms
+	private static final double DIRECTION_CHANGE_POS = 0.1;	//更改方向的概率
+	private static final double FIRE_MISSILE_POS = 0.02;		//发射子弹的概率
 	
 	public EnemyTank(ArrayList<Sprite> elements) {
 		super(elements);
-		SPEED = 100;
+		SPEED = 100;  //敌方坦克速度
 	}
-	
-	/**
-	 * Change direction at random. & Fire missile at random.
-	 */
+
 	public void update(double time) {
 		super.update(time);
 		attemptChangeDirection();
@@ -33,29 +26,48 @@ public class EnemyTank extends Tank {
 	}
 	
 	private void attemptChangeDirection() {
-		if (Math.random() < DIRECTION_CHANGE_POS 
-				&& System.nanoTime() - lastChangeDirection > DIRECTION_DELAY) {
+		if (Math.random() < DIRECTION_CHANGE_POS  && System.nanoTime() - lastChangeDirection > DIRECTION_DELAY) {
 			changeRandomDirection();
 		}
 	}
 	
 	private void changeRandomDirection() {
-		int dir = (int)(Math.random() * 4);
-		switch (dir) {
-		case 0:
-			setDirection(Direction.UP);
-			break;
-		case 1:
-			setDirection(Direction.DOWN);
-			break;
-		case 2:
-			setDirection(Direction.LEFT);
-			break;
-		case 3:
-			setDirection(Direction.RIGHT);
-			break;
-		default:
-			break;
+		double playerPositionX = Game.playerTankPositionX();
+		double playerPositionY = Game.playerTankPositionY();
+		double enemyPositionX = getPositionX();
+		double enemyPositionY = getPositionY();
+		int dir = (int)(Math.random() * 2);
+		if (enemyPositionY - playerPositionY > 0 && enemyPositionX - playerPositionX > 0) {
+			if (dir == 0) {
+				setDirection(Direction.UP);
+			}
+			else {
+				setDirection(Direction.LEFT);
+			}
+		}
+		if (enemyPositionY - playerPositionY > 0 && enemyPositionX - playerPositionX < 0) {
+			if (dir == 0) {
+				setDirection(Direction.UP);
+			}
+			else {
+				setDirection(Direction.RIGHT);
+			}
+		}
+		if (enemyPositionY - playerPositionY < 0 && enemyPositionX - playerPositionX > 0) {
+			if (dir == 0) {
+				setDirection(Direction.DOWN);
+			}
+			else {
+				setDirection(Direction.LEFT);
+			}
+		}
+		if (enemyPositionY - playerPositionY < 0 && enemyPositionX - playerPositionX < 0) {
+			if (dir == 0) {
+				setDirection(Direction.DOWN);
+			}
+			else {
+				setDirection(Direction.RIGHT);
+			}
 		}
 		lastChangeDirection = System.nanoTime();
 	}
@@ -67,8 +79,7 @@ public class EnemyTank extends Tank {
 	}
 	
 	protected void dealWithCollision(Sprite s) {
-		if (s.BITMASK == Game.PLAYER_MISSILE_MASK
-				|| s.BITMASK == Game.PLAYER_TANK_MASK) {
+		if (s.BITMASK == Game.PLAYER_MISSILE_MASK || s.BITMASK == Game.PLAYER_TANK_MASK) {
 			health--;
 		}
 	}

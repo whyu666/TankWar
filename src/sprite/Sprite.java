@@ -9,27 +9,28 @@ import javafx.geometry.Rectangle2D;
  * Essential class for object movements and collision.
  */
 public abstract class Sprite implements Comparable<Sprite> {
-    private Image image;
-    protected double positionX;
-    protected double positionY;  
+    private Image image;            //图像
+    private boolean alive;          //是否存活
+    protected double positionX;     //x坐标
+    protected double positionY;     //y坐标
     protected double lastX;
     protected double lastY;
-    protected double velocityX;
-    protected double velocityY;
-    protected double width;
-    protected double height;
-    
+    protected double velocityX;     //沿x方向的速度
+    protected double velocityY;     //沿y方向的速度
+    protected double width;         //长度
+    protected double height;        //宽度
     protected int BITMASK;
-    private boolean alive = true;
-    protected int health = 1;
+    protected int health;           //生命值
 
     public Sprite() {
+        alive = true;
         positionX = 0;
         positionY = 0;    
         velocityX = 0;
         velocityY = 0;
         lastX = 0;
         lastY = 0;
+        health = 1;
     }
 
     public void setImage(Image i) {
@@ -46,6 +47,14 @@ public abstract class Sprite implements Comparable<Sprite> {
     public void setPosition(double x, double y) {
         positionX = x;
         positionY = y;
+    }
+
+    public double getPositionX() {
+        return positionX;
+    }
+
+    public double getPositionY() {
+        return positionY;
     }
 
     public void setVelocity(double x, double y) {
@@ -95,11 +104,7 @@ public abstract class Sprite implements Comparable<Sprite> {
     		setAlive(false);
     	}
     }
-    
-    /**
-     * @param s another sprite collided
-     * Function to be overridden.
-     */
+
     protected abstract void dealWithCollision(Sprite s);
     
     /**
