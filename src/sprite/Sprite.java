@@ -1,12 +1,9 @@
 package sprite;
 
+import java.util.Objects;
 import javafx.scene.image.Image;
-import stable.Grass;
-import stable.Water;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.geometry.Rectangle2D;
-
-import java.util.Objects;
 
 /**
  * Essential class for object movements and collision.
@@ -113,19 +110,7 @@ public abstract class Sprite implements Comparable<Sprite> {
     }
 
 	@Override
-	public int compareTo(Sprite o) {
-		if (o instanceof Water) {
-			return 1;
-		}
-		if (o instanceof Grass) {
-			return -1;
-		}
-		if (this instanceof Water) {
-			return -1;
-		}
-		if (this instanceof Grass) {
-			return 1;
-		}
+	public int compareTo(Sprite o) {  //调用Comparable接口，需要将其中的compareTo实例化
 		return 0;
 	}
 
