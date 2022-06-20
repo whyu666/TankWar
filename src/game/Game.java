@@ -14,10 +14,6 @@ import sprite.Sprite;
 import stable.Home;
 import ui.GameHud;
 
-enum Status {  //游戏运行状态
-	Wait, Play, Lost, Win, ToLose, Between
-}
-
 public class Game {
 
 	private static final String TITLE = "保卫你的家";
@@ -291,4 +287,8 @@ public class Game {
 	public static final int PLAYER_MISSILE_MASK = 6;  //二进制：0110
 	public static final int ENEMY_MISSILE_MASK = 9;   //二进制：1001
 	public static final int STABLE_MASK = 15;         //二进制：1111
+
+	enum Status {  //游戏运行状态
+		Wait, Play, Lost, Win, ToLose, Between
+	}
 }
