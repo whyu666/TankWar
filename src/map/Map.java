@@ -1,6 +1,8 @@
 package map;
 
-public class Map {
+import java.io.Serializable;
+
+public class Map implements Serializable {
 
 	public int[][] tankPos, brickPos, stonePos, waterPos, grassPos;
 	public int[] homePos, playerPos;

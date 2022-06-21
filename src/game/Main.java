@@ -10,6 +10,7 @@ import javafx.util.Duration;
 import ui.GameUI;
 import ui.LeadersScene;
 import ui.OverScene;
+import ui.SetMapScene;
 import ui.SoundManager;
 import ui.StartScene;
 import ui.WinScene;
@@ -52,12 +53,25 @@ public class Main extends Application {
         }
     }
 
+    class GameMap implements EventHandler<ActionEvent> {  //增加返回主界面动作
+        public void handle(ActionEvent event) {
+            showMap();
+        }
+    }
+
+    class SaveMap implements EventHandler<ActionEvent> {  //增加返回主界面动作
+        public void handle(ActionEvent event) {
+            returnGame();
+        }
+    }
+
     @Override
     public void start (Stage s) {
     	this.stage = s;
     	soundManager = new SoundManager();
         //GameUI初始化过程加入返回主菜单键
-    	uiManager = new GameUI(new GameStart(), new ShowLeaders(), new GameExit(), new GameReturn());
+    	uiManager = new GameUI(new GameStart(), new ShowLeaders(), new GameExit(),
+                new GameReturn(), new GameMap(), new SaveMap());
     	Scene startScene = new StartScene(uiManager, SIZE).initScene();
     	configureStage(startScene);
     	stage.show();
@@ -98,6 +112,11 @@ public class Main extends Application {
 
     public void returnGame() {  //增加返回主界面函数
         Scene startScene = new StartScene(uiManager, SIZE).initScene();
+        stage.setScene(startScene);
+    }
+
+    public void showMap() {  //增加返回主界面函数
+        Scene startScene = new SetMapScene(uiManager, SIZE).initScene();
         stage.setScene(startScene);
     }
 

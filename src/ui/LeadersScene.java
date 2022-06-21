@@ -23,16 +23,12 @@ public class LeadersScene extends GameScene {
 	}
 	
 	public Scene initScene() {
-
     	BorderPane root = new BorderPane();
-    	
     	Node leaders = initLeadersView();
-    	
     	Label title = new Label("排行榜");
     	title.setFont(new Font(20));
     	title.setPadding(new Insets(15, 15, 15, 15));
     	title.setTextAlignment(TextAlignment.CENTER);
-    	
     	root.setTop(title);
     	root.setCenter(leaders);
     	BorderPane.setAlignment(title, Pos.CENTER);

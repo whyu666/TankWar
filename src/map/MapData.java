@@ -1,10 +1,13 @@
 package map;
 
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
 import java.util.ArrayList;
 
 public class MapData {
 	
 	private final ArrayList<Map> maps;
+	private static final String MAP_FILE = "map.save";
 
 	public MapData() {
 		maps = new ArrayList<>();
@@ -19,6 +22,18 @@ public class MapData {
 		return maps.get(level);
 	}
 
+	private Map read() {
+		try {
+			FileInputStream fin = new FileInputStream(MAP_FILE);
+			ObjectInputStream ois = new ObjectInputStream(fin);
+			Map map = (Map) ois.readObject();
+			ois.close();
+			return map;
+		} catch(Exception e) {
+			return null;
+		}
+	}
+
 	private void initMapData() {
 		Map map1 = new Map(tankPos1, brickPos1, stonePos1, waterPos1, grassPos1, homePos1, playerPos1);
 		Map map2 = new Map(tankPos2, brickPos2, stonePos2, waterPos2, grassPos2, homePos2, playerPos2);
@@ -26,6 +41,10 @@ public class MapData {
 		maps.add(map1);
 		maps.add(map2);
 		maps.add(map3);
+		Map newMap = read();
+		if (newMap != null) {
+			maps.add(newMap);
+		}
 	}
 
 	//地图设计
