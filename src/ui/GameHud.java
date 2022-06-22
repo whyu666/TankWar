@@ -1,6 +1,7 @@
 package ui;
 
 import game.Game;
+import game.GameTwoStart;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.layout.BorderPane;
@@ -14,12 +15,14 @@ public class GameHud {
 	private Text timeHud;
 	private Text livesHud;
 	private Text levelHud;
-	private final Game myGame;
+	private  Game myGame;
 	
 	public GameHud(Game game) {
 		myGame = game;
 	}
-	
+	public GameHud(GameTwoStart gametwo) {
+		gametwo = gametwo;
+	}
 	public Node initHud() {
 		livesHud = new Text();
 		configureGameHud(livesHud);

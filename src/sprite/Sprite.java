@@ -11,8 +11,8 @@ public abstract class Sprite implements Comparable<Sprite> {
     private boolean alive;  //是否存活
     protected double positionX;  //x坐标
     protected double positionY;  //y坐标
-    protected double lastX;  //最后的x坐标
-    protected double lastY;  //最后的y坐标
+    protected double lastX;  //上一次的x坐标
+    protected double lastY;  //上一次的y坐标
     protected double velocityX;  //沿x方向的速度
     protected double velocityY;  //沿y方向的速度
     protected double width;  //长度
@@ -31,17 +31,18 @@ public abstract class Sprite implements Comparable<Sprite> {
         health = 1;
     }
 
-    public void setImage(Image i) {
-        image = i;
-        width = i.getWidth();
-        height = i.getHeight();
-    }
+
 
     public void setImage(String filename) {
         Image i = new Image(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream(filename)));
         setImage(i);
     }
 
+    public void setImage(Image i) {
+        image = i;
+        width = i.getWidth();
+        height = i.getHeight();
+    }
     public void setPosition(double x, double y) {
         positionX = x;
         positionY = y;

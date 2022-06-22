@@ -23,14 +23,9 @@ public class StartScene extends GameScene {
     	buttons.setPadding(new Insets(15, 12, 15, 12));
         buttons.setSpacing(100);
         Button startButton = uiManager.initStartButton();
-		Button setMapButton = uiManager.initMapButton();
-    	Text text = new Text();
-		text.setFont(new Font(16));
-		text.setWrappingWidth(400);
-		text.setTextAlignment(TextAlignment.CENTER);
-		text.setText("使用WASD或方向键进行移动\n\n空格键发射子弹\n\n保护你的家并摧毁敌人\n\n\n\n" +
-				"作弊操作\n\nB - 无敌五秒\n\nC - 消灭地图上的所有敌方坦克\n\nL - 玩家坦克增加一条生命\n\nN - 跳到下一关");
-    	buttons.getChildren().addAll(text, startButton, setMapButton);
+		Button Double_game_Btn = uiManager.initDouble_gameButton();
+		Button help_Btn=uiManager.init_helpButton();
+    	buttons.getChildren().addAll(startButton, Double_game_Btn ,help_Btn);
     	buttons.setAlignment(Pos.CENTER);
     	return buttons;
     }

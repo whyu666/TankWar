@@ -65,7 +65,7 @@ public class MapData {
 	};
 	private static final int[] homePos1 = {320, 640};
 	private static final int[] playerPos1 = {240, 640};
-	
+
 	private static final int[][] tankPos2 = {
 		{0, 0}, {320, 0}, {640, 0}
 	};
@@ -83,7 +83,10 @@ public class MapData {
 		{80, 80, 80, 120}, {520, 560, 120, 80}, {480, 120, 80, 100}
 	};
 	private static final int[] homePos2 = {320, 640};
+
 	private static final int[] playerPos2 = {240, 640};
+
+
 	
 	private static final int[][] tankPos3 = {
 		{0, 0}, {640, 0}, {0, 640}, {640, 640}
@@ -105,4 +108,5 @@ public class MapData {
 	};
 	private static final int[] homePos3 = {320, 320};
 	private static final int[] playerPos3 = {320, 240};
+
 }

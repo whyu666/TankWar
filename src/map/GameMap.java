@@ -20,6 +20,7 @@ public class GameMap {
 	private final int width, height;
 	private ArrayList<Sprite> elements;
 	private PlayerTank playerTank;
+
 	private MapData data;
 	private Map currentMap;
 
@@ -33,40 +34,12 @@ public class GameMap {
 		data = new MapData();
 	}
 
+    //单人游戏地图
 	public void buildMap(int level) {
 		pad();
 		createMap(level);
 	}
 
-	public void spawnTank() {
-		for (int[] pos: currentMap.tankPos) {
-			if (Math.random() < SPAWN_POS) {
-				EnemyTank tank = new EnemyTank(elements);
-				tank.setPosition(pos[0], pos[1]);
-				boolean valid = true;
-				for (Sprite e: elements) {
-					if (tank.intersects(e)) {
-						valid = false;
-					}
-				}
-				if (valid) {
-					tank.setDirection(Direction.DOWN);
-					elements.add(tank);
-				}
-			}
-		}
-	}
-
-	public PlayerTank getPlayerTank() {
-		return playerTank;
-	}
-
-	public PlayerTank revivePlayerTank() {
-		playerTank = new PlayerTank(elements);
-		playerTank.setPosition(currentMap.playerPos[0], currentMap.playerPos[1]);
-		elements.add(playerTank);
-		return playerTank;
-	}
 
 	private void pad() {
 		double x, y;
@@ -103,10 +76,6 @@ public class GameMap {
 		addHome();
 		playerTank = revivePlayerTank();
 	}
-	
-	public int numLevels() {
-		return data.numLevels();
-	}
 
 	private void addStable(int[][] pos, Class<? extends Stable> cls) {
 		for (int[] chunk: pos) {
@@ -135,4 +104,40 @@ public class GameMap {
 		home.setPosition(currentMap.homePos[0], currentMap.homePos[1]);
 		elements.add(home);
 	}
+	//添加敌方坦克
+	public void spawnTank() {
+		for (int[] pos: currentMap.tankPos) {
+			if (Math.random() < SPAWN_POS) {
+				EnemyTank tank = new EnemyTank(elements);
+				tank.setPosition(pos[0], pos[1]);
+				boolean valid = true;
+				for (Sprite e: elements) {
+					if (tank.intersects(e)) {
+						valid = false;
+					}
+				}
+				if (valid) {
+					tank.setDirection(Direction.DOWN);
+					elements.add(tank);
+				}
+			}
+		}
+	}
+
+	public PlayerTank getPlayerTank() {
+		return playerTank;
+	}
+
+    //赋予玩家坦克生命
+	public PlayerTank revivePlayerTank() {
+		playerTank = new PlayerTank(elements);
+		playerTank.setPosition(currentMap.playerPos[0], currentMap.playerPos[1]);
+		elements.add(playerTank);
+		return playerTank;
+	}
+
+	public int numLevels() {
+		return data.numLevels();
+	}
+
 }
