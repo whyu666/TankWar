@@ -11,7 +11,6 @@ public class PlayerTank extends Tank {
 	public PlayerTank(ArrayList<Sprite> elements) {
 		super(elements);
 		setGreen();
-		person = 1;
 		BITMASK = Game.PLAYER_TANK_MASK;
 		buffImmortal();  //初始化时，添加buff
 	}
@@ -30,31 +29,6 @@ public class PlayerTank extends Tank {
 		if (System.nanoTime() - immortalStartTime > IMMORTAL_DELAY * 10) {  //buff持续时间
 			debuffImmortal();
 		}
-	}
-
-	public void fireMissile() {
-		//fire();
-		long time = System.nanoTime();
-		//if (time - fireTime < MISSILE_DELAY) {  //小于连续发射子弹最短时间，不能发射子弹
-		//	return;
-		//}
-		Missile missile = new Missile(missileDirection, getMissileMask(), 1);
-		switch (missileDirection) {
-			case UP:
-				missile.setPosition(positionX + 0.5 * width - 0.5 * missile.width, positionY - missile.height);
-				break;
-			case DOWN:
-				missile.setPosition(positionX + 0.5 * width - 0.5 * missile.width, positionY + height);
-				break;
-			case LEFT:
-				missile.setPosition(positionX - missile.width, positionY + 0.5 * height - 0.5 * missile.height);
-				break;
-			case RIGHT:
-				missile.setPosition(positionX + width, positionY + 0.5 * height - 0.5 * missile.height);
-				break;
-		}
-		//fireTime = time;
-		elements.add(missile);
 	}
 	
 	public int getMissileMask() {

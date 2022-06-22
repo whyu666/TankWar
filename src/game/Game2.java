@@ -30,7 +30,7 @@ public class Game2 {
     private static final long DIE_DELAY = 200 * 1000000L;  //玩家坦克阵亡后延时一段时间
 
     public int lives1, lives2;
-    private int score1, score2;
+    private int score;
     private static final int INITIAL_LIVES = 6;
     private static final int SCORE_UNIT = 100;
 
@@ -64,8 +64,7 @@ public class Game2 {
         startTime = System.nanoTime();
         lives1 = INITIAL_LIVES;
         lives2 = INITIAL_LIVES;
-        score1 = 0;
-        score2 = 0;
+        score = 0;
         currentLevel = 0;
         //界面绘制
         hudManager = new GameHud2(this);
@@ -238,35 +237,25 @@ public class Game2 {
                     playerTank1 = map.revivePlayerTank();
                     lives1--;
                     deadTime = System.nanoTime();
-                    score1 -= 300;
+                    score -= 300;
                 }
                 //if (e.getBITMASK() == playerTank2.getBITMASK()) {
                 if (e instanceof PlayerTank2) {
                     playerTank2 = map.revivePlayerTank2();
                     lives2--;
                     deadTime = System.nanoTime();
-                    score2 -= 300;
+                    score -= 300;
                 }
                 else if (e.getBITMASK() == ENEMY_TANK_MASK) {  //敌方坦克被子弹击中
-                    System.out.println(i);
-                    if (e.getPerson() == 1) {
-                        score1 += SCORE_UNIT;
-                    }
-                    if (e.getPerson() == 2) {
-                        score2 += SCORE_UNIT;
-                    }
+                    score += SCORE_UNIT;
                 }
                 elements.remove(i);
             }
         }
     }
 
-    public int getScore1() {
-        return score1;
-    }
-
-    public int getScore2() {
-        return score2;
+    public int getScore() {
+        return score;
     }
 
     public Status getStatus() {

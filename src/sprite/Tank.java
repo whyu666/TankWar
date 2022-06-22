@@ -80,7 +80,7 @@ public abstract class Tank extends Sprite {
 		}
 	}
 	
-	public void fire() {
+	public void fireMissile() {
 		long time = System.nanoTime();
 		if (time - fireTime < MISSILE_DELAY) {  //小于连续发射子弹最短时间，不能发射子弹
 			return;

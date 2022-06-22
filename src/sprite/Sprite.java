@@ -20,8 +20,6 @@ public abstract class Sprite implements Comparable<Sprite> {
     protected int BITMASK;  //识别码（二进制）
     protected int health;  //生命值
 
-    protected int person = 0; //记录是哪个玩家发射的子弹
-
     public Sprite() {
         alive = true;
         positionX = 0;
@@ -123,8 +121,4 @@ public abstract class Sprite implements Comparable<Sprite> {
 	public void setAlive(boolean alive) {
 		this.alive = alive;
 	}
-
-    public int getPerson() {
-        return person;
-    }
 }

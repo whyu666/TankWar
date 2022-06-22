@@ -36,33 +36,6 @@ public class Missile extends Sprite {
 		}
 	}
 
-	public Missile(Direction direction, int mask, int i) {
-		BITMASK = mask;
-		person = i;
-		switch (direction) {
-			case UP:
-				setImage(MISSILE_UP);
-				velocityX = 0;
-				velocityY = -SPEED;
-				break;
-			case DOWN:
-				setImage(MISSILE_DOWN);
-				velocityX = 0;
-				velocityY = SPEED;
-				break;
-			case LEFT:
-				setImage(MISSILE_LEFT);
-				velocityX = -SPEED;
-				velocityY = 0;
-				break;
-			case RIGHT:
-				setImage(MISSILE_RIGHT);
-				velocityX = SPEED;
-				velocityY = 0;
-				break;
-		}
-	}
-
 	protected void dealWithCollision(Sprite s) {
 		if (!(s instanceof Water || s instanceof Grass)) {
 			health = 0;
