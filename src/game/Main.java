@@ -34,7 +34,8 @@ public class Main extends Application {
     private KeyFrame frame;
     private Timeline animation;
     private GameUI uiManager;
-    private SoundManager soundManager;
+//    private SoundManager soundManager;
+    public static SoundManager soundManager;
 
     //处理开始按钮
     class GameStart implements EventHandler<ActionEvent> {

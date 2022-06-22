@@ -14,6 +14,8 @@ import sprite.Sprite;
 import stable.Home;
 import ui.GameHud;
 
+import static game.Main.soundManager;
+
 public class Game {
 
 		private static final String TITLE = "保卫你的家";
@@ -68,6 +70,7 @@ public class Game {
 			lives = INITIAL_LIVES;
 			score = 0;
 			currentLevel = 0;
+			soundManager.onNew();
 			//界面绘制
 			hudManager = new GameHud(this);
 			BorderPane root = new BorderPane();
@@ -129,6 +132,7 @@ public class Game {
 		}
 
 		private void nextLevel() {
+			soundManager.onNew();
 			if (currentLevel >= numLevels) {
 				status = Status.Win;
 				return;
@@ -148,6 +152,7 @@ public class Game {
 			switch (code) {
 				case SPACE:
 					playerTank.fireMissile();
+					soundManager.onShoot();
 					break;
 				case RIGHT:
 				case D:
@@ -263,9 +268,11 @@ public class Game {
 						playerTank = map.revivePlayerTank();
 						lives--;
 						deadTime = System.nanoTime();
+						soundManager.onSlain();
 					}
 					else if (e.getBITMASK() == Game.ENEMY_TANK_MASK) {  //敌方坦克被子弹击中
 						score += SCORE_UNIT;
+						soundManager.onKill();
 					}
 				}
 			}
