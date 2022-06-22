@@ -268,7 +268,7 @@ public class Game {
 						playerTank = map.revivePlayerTank();
 						lives--;
 						deadTime = System.nanoTime();
-						soundManager.onSlain();
+						if (lives>0) soundManager.onSlain();
 					}
 					else if (e.getBITMASK() == Game.ENEMY_TANK_MASK) {  //敌方坦克被子弹击中
 						score += SCORE_UNIT;

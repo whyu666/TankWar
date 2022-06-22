@@ -4,21 +4,19 @@ import java.nio.file.Paths;
 
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.util.Duration;
 
 public class SoundManager {
 
-	//多线程解决音效卡顿
-	class PlaySound extends Thread{
-		String file;
-		public PlaySound(String filepath){file = filepath;}
-		private void play(String filepath) {
+	static class Sfx{
+		MediaPlayer mediaPlayer;
+		public Sfx(String filepath){
 			Media hit = new Media(Paths.get(filepath).toUri().toString());
-			MediaPlayer mediaPlayer = new MediaPlayer(hit);
-			mediaPlayer.play();
+			mediaPlayer = new MediaPlayer(hit);
 		}
-		@Override
-		public void run(){	//线程要执行的任务写在 run() 方法中
-			play(file);	//线程理应自动结束
+		public void play(){
+			mediaPlayer.stop();
+			mediaPlayer.play();
 		}
 	}
 
@@ -27,19 +25,21 @@ public class SoundManager {
 	public int nKill = 0;		//杀敌数
 	public int nSerial = 0;		//连杀数
 
-	//全局的音效
-	public static void playVictory()		{play("sounds/victory.mp3");}
-	public static void playDefeat() 		{play("sounds/defeat.mp3");}
+	//音效单例集
+	public static Sfx sVictory = new Sfx("sounds/victory.mp3");
+	public static Sfx sDefeat = new Sfx("sounds/defeat.mp3");
+	public static Sfx sDominating = new Sfx("sounds/dominating.mp3");
+	public static Sfx sFirst = new Sfx("sounds/first.mp3");
+	public static Sfx sLegendary = new Sfx("sounds/legendary.mp3");
+	public static Sfx sMissile = new Sfx("sounds/missile.mp3");
+	public static Sfx sShutdown = new Sfx("sounds/shutdown.mp3");
+	public static Sfx sSlain = new Sfx("sounds/slain.mp3");
 
-	//不要直接用，请用onXxx()
-	public PlaySound playDominating = new PlaySound("sounds/dominating.mp3");
-	public PlaySound playFirst = new PlaySound("sounds/first.mp3");
-	public PlaySound playLegendary = new PlaySound("sounds/legendary.mp3");
-	public PlaySound playMissile = new PlaySound("sounds/missile.mp3");
-	public PlaySound playShutdown = new PlaySound("sounds/shutdown.mp3");
-	public PlaySound playSlain = new PlaySound("sounds/slain.mp3");
+	//全局音效
+	public void playVictory()		{sVictory.play();}
+	public void playDefeat() 		{sDefeat.play();}
 
-	//onXxx:动作发生时调用
+	//自动音效 onXxx:动作发生时调用
 	//TODO: 改为监听器,解决播放中断
 	public void onNew(){	//开局初始化
 		nMissile = 0;
@@ -48,19 +48,26 @@ public class SoundManager {
 	}
 	public void onShoot(){	//发射子弹
 		nMissile++;
-		playMissile.run();
+		if (sMissile.mediaPlayer.getStatus()== MediaPlayer.Status.PLAYING){
+			sMissile.mediaPlayer.stop();
+			sMissile.mediaPlayer.setStartTime(Duration.millis(60));
+			sMissile.mediaPlayer.play();
+		}
+		else{
+			sMissile.play();
+		}
 	}
 	public void onKill(){	//杀敌
-		if(nKill==0) playFirst.run();
-		else if(nSerial<3) playShutdown.run();
-		else if(nSerial<5) playDominating.run();
-		else playLegendary.run();
+		if(nKill==0) sFirst.play();
+		else if(nSerial<3) sShutdown.play();
+		else if(nSerial<5) sDominating.play();
+		else sLegendary.play();
 
 		nKill++;
 		nSerial++;
 	}
 	public void onSlain(){	//被杀
-		playSlain.run();
+		sSlain.play();
 		nSerial=0;
 	}
 
