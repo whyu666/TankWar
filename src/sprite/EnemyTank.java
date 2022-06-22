@@ -75,7 +75,7 @@ public class EnemyTank extends Tank {
 	
 	private void fireMissileRandom() {
 		if (Math.random() < FIRE_MISSILE_POS) {
-			fireMissile();
+			fire();
 		}
 	}
 	

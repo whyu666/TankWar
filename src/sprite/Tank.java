@@ -12,7 +12,7 @@ public abstract class Tank extends Sprite {
 	private Direction direction = Direction.UP;  //默认坦克方向向上
 	protected Direction missileDirection = getDirection();  //坦克发射子弹的方向即为坦克方向
 	private long fireTime = System.nanoTime();
-	private final ArrayList<Sprite> elements;
+	protected final ArrayList<Sprite> elements;
 	
 	public Tank(ArrayList<Sprite> elements) {
 		this.elements = elements;
@@ -80,7 +80,7 @@ public abstract class Tank extends Sprite {
 		}
 	}
 	
-	public void fireMissile() {
+	public void fire() {
 		long time = System.nanoTime();
 		if (time - fireTime < MISSILE_DELAY) {  //小于连续发射子弹最短时间，不能发射子弹
 			return;

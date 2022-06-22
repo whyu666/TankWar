@@ -16,6 +16,7 @@ import javafx.util.Duration;
 import ui.GameUI;
 import ui.LeadersScene;
 import ui.OverScene;
+import ui.OverScene2;
 import ui.SoundManager;
 import ui.StartScene;
 import ui.WinScene;
@@ -28,7 +29,7 @@ public class Main extends Application {
     private static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
 
     private Game myGame;
-    private GameTwoStart myGame2;
+    private Game2 myGame2;
     private Stage stage;
     private KeyFrame frame;
     private Timeline animation;
@@ -43,12 +44,13 @@ public class Main extends Application {
     }
     //处理双人模式按钮
     class  GameTwo implements EventHandler<ActionEvent> {
-        public void handle(ActionEvent event) {double_game_start();}
+        public void handle(ActionEvent event) {
+            doubleGameStart();}
     }
     //处理帮助按钮
     class GameHelp implements EventHandler<ActionEvent> {
         public void handle(ActionEvent event) {
-            gamehelp();
+            gameHelp();
         }
     }
     //处理显示排行榜按钮
@@ -98,11 +100,11 @@ public class Main extends Application {
         myGame.step(Main.SECOND_DELAY);
     }
 
-    private void double_game_start() {
-        myGame2 = new GameTwoStart();
+    private void doubleGameStart() {
+        myGame2 = new Game2();
         stage.setTitle("保卫你的家");
         uiManager.refreshGame();//文字不可输入
-        Scene gameScene = myGame2.init_game_two(SIZE, SIZE);
+        Scene gameScene = myGame2.initGameTwo(SIZE, SIZE);
         stage.setScene(gameScene);
         //设置游戏循环
         frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY), e -> step2());
@@ -113,11 +115,9 @@ public class Main extends Application {
     }
     private void step2() {
         switch(myGame2.getStatus()) {
-            case Lost:
-                gameOver();
-                return;
-            case Win:
-                gameWin();
+            case AllLose:
+            case AllWin:
+                gameOver2();
                 return;
             default:
                 break;
@@ -125,7 +125,7 @@ public class Main extends Application {
         myGame2.step(Main.SECOND_DELAY);
     }
 
-    private void gamehelp() {
+    private void gameHelp() {
         VBox buttons = new VBox();
         buttons.setPadding(new Insets(100, 100, 100, 120));
         buttons.setSpacing(100);
@@ -138,9 +138,8 @@ public class Main extends Application {
         Button retMain=uiManager.initReturnButton();
         buttons.getChildren().addAll(retMain);
         buttons.getChildren().addAll(text);
-        Scene helpsence=new Scene(buttons, SIZE, SIZE);
-        stage.setScene(helpsence);
-        System.out.println("1");
+        Scene helpScene = new Scene(buttons, SIZE, SIZE);
+        stage.setScene(helpScene);
     }
 
     public void gameWin() {
@@ -150,12 +149,17 @@ public class Main extends Application {
     	clearGame();
     }
 
-
     public void gameOver() {
     	soundManager.playDefeat();
     	Scene overScene = new OverScene(uiManager, SIZE, myGame).initScene();
     	stage.setScene(overScene);
     	clearGame();
+    }
+
+    public void gameOver2() {
+        Scene overScene2 = new OverScene2(uiManager, SIZE, myGame2).initScene();
+        stage.setScene(overScene2);
+        clearGame();
     }
 
     public void showLeaders() {
@@ -167,11 +171,6 @@ public class Main extends Application {
         Scene startScene = new StartScene(uiManager, SIZE).initScene();
         stage.setScene(startScene);
     }
-
-
-
-
-
 
     private void clearGame() {
     	myGame = null;

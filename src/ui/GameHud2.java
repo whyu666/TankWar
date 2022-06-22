@@ -1,6 +1,6 @@
 package ui;
 
-import game.GameTwoStart;
+import game.Game2;
 import javafx.geometry.Pos;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -17,10 +17,10 @@ public class GameHud2 {
     private Text livesHud1;
     private Text livesHud2;
     private Text levelHud;
-    private GameTwoStart gamtwo;
+    private Game2 gameTwo;
 
-    public GameHud2(GameTwoStart gametwo) {
-        this.gamtwo = gametwo;
+    public GameHud2(Game2 gametwo) {
+        this.gameTwo = gametwo;
     }
 
     public HBox initHud() {
@@ -55,15 +55,15 @@ public class GameHud2 {
     }
 
     public void updateLivesHud() {
-        livesHud1.setText(String.format("总生命: %d", gamtwo.lives));
+        livesHud1.setText(String.format("总生命: %d", gameTwo.lives1));
     }
 
     public void updateTimeHud() {
-        timeHud.setText("时间: " + (gamtwo.GAME_TIME_SECONDS - (System.nanoTime() - gamtwo.getStartTime()) / 1000000000L));
+        timeHud.setText("时间: " + (Game2.GAME_TIME_SECONDS - (System.nanoTime() - gameTwo.getStartTime()) / 1000000000L));
     }
 
     public void updateLevelHud() {
-        levelHud.setText("关卡: " + gamtwo.getCurrentLevel());
+        levelHud.setText("关卡: " + gameTwo.getCurrentLevel());
     }
     public double getlivesHud1Height() {
         return livesHud1.getLayoutBounds().getHeight();
