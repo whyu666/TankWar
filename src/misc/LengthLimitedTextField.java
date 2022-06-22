@@ -1,7 +1,5 @@
 package misc;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.scene.control.TextField;
 
 public class LengthLimitedTextField extends TextField {

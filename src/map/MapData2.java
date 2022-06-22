@@ -26,9 +26,9 @@ public class MapData2 {
     }
 
     private void initMapData() {
-        Map map1 = new Map(tankPos1, brickPos1, stonePos1, waterPos1, grassPos1, homePos1, playerPos1,player2Pos1);
-        Map map2 = new Map(tankPos2, brickPos2, stonePos2, waterPos2, grassPos2, homePos2, playerPos2,player2Pos2);
-        Map map3 = new Map(tankPos3, brickPos3, stonePos3, waterPos3, grassPos3, homePos3, playerPos3,player2Pos3);
+        Map map1 = new Map(tankPos1, brickPos1, stonePos1, waterPos1, grassPos1, homePos1, playerPos1, player2Pos1);
+        Map map2 = new Map(tankPos2, brickPos2, stonePos2, waterPos2, grassPos2, homePos2, playerPos2, player2Pos2);
+        Map map3 = new Map(tankPos3, brickPos3, stonePos3, waterPos3, grassPos3, homePos3, playerPos3, player2Pos3);
         maps.add(map1);
         maps.add(map2);
         maps.add(map3);
@@ -52,7 +52,6 @@ public class MapData2 {
     };
     private static final int[] homePos1 = {320, 640};
     private static final int[] playerPos1 = {240, 640};
-
     private static final int[] player2Pos1 = {400, 640};//玩家2
 
     private static final int[][] tankPos2 = {

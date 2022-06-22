@@ -1,14 +1,14 @@
 package sprite;
 
-import java.util.ArrayList;
 import game.Game;
+import java.util.ArrayList;
 
-public class PlayerTank extends Tank {
+public class PlayerTank2 extends Tank {
 
 	private static final long IMMORTAL_DELAY = 5 * 1000 * 1000 * 100;  //buff持续时间：5秒
 	private long immortalStartTime = System.nanoTime();  //生成玩家坦克时，记录时间
-	
-	public PlayerTank(ArrayList<Sprite> elements) {
+
+	public PlayerTank2(ArrayList<Sprite> elements) {
 		super(elements);
 		setGreen();
 		BITMASK = Game.PLAYER_TANK_MASK;

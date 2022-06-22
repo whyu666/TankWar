@@ -10,6 +10,7 @@ import map.GameMap;
 import map.GameMap2;
 import sprite.Direction;
 import sprite.PlayerTank;
+import sprite.PlayerTank2;
 import sprite.Sprite;
 import stable.Home;
 import ui.GameHud2;
@@ -35,12 +36,12 @@ public class GameTwoStart {
     public int lives;
     public int score1;
     public int score2;
-    private static final int INITIAL_LIVES =6;
+    private static final int INITIAL_LIVES = 6;
     private static final int SCORE_UNIT = 100;
 
     private GraphicsContext gc;
     private PlayerTank playerTank1;
-    private PlayerTank playerTank2;
+    private PlayerTank2 playerTank2;
     private int width, height;
     private GameMap2 map;
     private int numLevels;
@@ -73,7 +74,7 @@ public class GameTwoStart {
         lives = INITIAL_LIVES;
 
         score1 = 0;
-        score2=0;
+        score2 = 0;
         currentLevel = 0;
         //界面绘制
         hudManager = new GameHud2(this);
@@ -87,7 +88,7 @@ public class GameTwoStart {
         gc = initGraphicsContext(root);
         Scene myScene = new Scene(root, width, height + hudManager.getlivesHud1Height(), Color.BLACK);
         myScene.setOnKeyPressed(e -> handleKeyInput(e.getCode()));  //对输入进行响应
-        myScene.setOnKeyPressed(e->handleKeyInput2(e.getCode()));
+        //myScene.setOnKeyPressed(e->handleKeyInput2(e.getCode()));
         return myScene;
     }
 
@@ -137,8 +138,8 @@ public class GameTwoStart {
         elements.clear();
         startTime = System.nanoTime();
         map.buildMap2(currentLevel);
-        playerTank1= map.getPlayerTank();
-        playerTank2=map.getPlayerTank2();
+        playerTank1 = map.getPlayerTank();
+        playerTank2 = map.getPlayerTank2();
         status = GameTwoStart.Status.Play;
         currentLevel++;
     }
@@ -167,25 +168,12 @@ public class GameTwoStart {
                 playerTank1.setDirection(Direction.DOWN);
                 playerTank1PositionX = playerTank1.getPositionX();
                 break;
-            case N:
-                nextLevel();
-                break;
-            default:
-                break;
-        }
-    }
-
-    //处理玩家2的键盘输入
-    private void handleKeyInput2 (KeyCode code) {
-        if (System.nanoTime() - deadTime < DIE_DELAY) {  //当在阵亡延时中，忽略按键输入
-            return;
-        }
-        switch (code) {
             case SPACE:
                 playerTank2.fireMissile();
                 break;
             case D:
                 playerTank2.setDirection(Direction.RIGHT);
+                System.out.println(playerTank2.getPositionX());
                 playerTank2PositionY = playerTank2.getPositionY();
                 break;
             case A:
@@ -203,7 +191,6 @@ public class GameTwoStart {
                 nextLevel();
                 break;
             default:
-
                 break;
         }
     }
@@ -225,8 +212,6 @@ public class GameTwoStart {
             }
         }
     }
-
-
 
     public int getCurrentLevel() {
         return currentLevel;
@@ -277,8 +262,8 @@ public class GameTwoStart {
                     lives--;
                     deadTime = System.nanoTime();
                 }
-                if (e.getBITMASK() == playerTank2.getBITMASK()) {  //玩家1坦克被子弹击中
-                    playerTank2 = map.revivePlayerTank();
+                if (e.getBITMASK() == playerTank2.getBITMASK()) {  //玩家2坦克被子弹击中
+                    playerTank2 = map.revivePlayerTank2();
                     lives--;
                     deadTime = System.nanoTime();
                 }

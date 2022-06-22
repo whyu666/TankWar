@@ -26,6 +26,6 @@ public class Map implements Serializable {
 		this.grassPos = grassPos;
 		this.homePos = homePos;
 		this.playerPos = playerPos;
-		this.player2Pos=player2Pos;
+		this.player2Pos = player2Pos;
 	}
 }

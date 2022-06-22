@@ -3,6 +3,7 @@ package map;
 import sprite.Direction;
 import sprite.EnemyTank;
 import sprite.PlayerTank;
+import sprite.PlayerTank2;
 import sprite.Sprite;
 import stable.*;
 
@@ -19,7 +20,7 @@ public class GameMap2 {
     private final int width, height;
     private ArrayList<Sprite> elements;
     private PlayerTank playerTank;//玩家1
-    private PlayerTank playerTank2;//玩家2
+    private PlayerTank2 playerTank2;//玩家2
     private MapData2 data;
     private Map currentMap;
 
@@ -127,7 +128,7 @@ public class GameMap2 {
     public PlayerTank getPlayerTank() {
         return playerTank;
     }
-    public PlayerTank getPlayerTank2() {
+    public PlayerTank2 getPlayerTank2() {
         return playerTank2;
     }
     //赋予玩家坦克生命
@@ -138,11 +139,11 @@ public class GameMap2 {
         return playerTank;
     }
 
-    public PlayerTank revivePlayerTank2() {
-        playerTank2 = new PlayerTank(elements);
+    public PlayerTank2 revivePlayerTank2() {
+        playerTank2 = new PlayerTank2(elements);
         playerTank2.setPosition(currentMap.player2Pos[0], currentMap.player2Pos[1]);
         elements.add(playerTank2);
-        return playerTank;
+        return playerTank2;
     }
 
     public int numLevels() {
