@@ -23,7 +23,7 @@ public class Game2 {
     private int currentLevel = 0;  //当前关卡
     private long deadTime = System.nanoTime();
     private static final long DIE_DELAY = 200 * 1000000L;  //玩家坦克阵亡后延时一段时间
-    private int lives1, lives2;
+    private int lives;
     private int score;
     private static final int INITIAL_LIVES = 6;
     private static final int SCORE_UNIT = 100;
@@ -48,8 +48,7 @@ public class Game2 {
         this.height = height;
         elements = new ArrayList<>();
         startTime = System.nanoTime();
-        lives1 = INITIAL_LIVES;
-        lives2 = INITIAL_LIVES;
+        lives = INITIAL_LIVES;
         score = 0;
         currentLevel = 0;
         //界面绘制
@@ -68,15 +67,7 @@ public class Game2 {
     }
 
     public void step(double elapsedTime) {
-        if (lives1 <= 0 && status != Status.Lose1 && lives2 > 0) {
-            status = Status.Lose1;
-            return;
-        }
-        if (lives2 <= 0 && status != Status.Lose2 && lives1 > 0) {
-            status = Status.Lose2;
-            return;
-        }
-        if (lives1 <= 0 && lives2 <= 0 && status != Status.AllLose) {
+        if (lives <= 0 && status != Status.AllLose) {
             status = Status.AllLose;
             soundManager.playDefeat();
             return;
@@ -188,12 +179,8 @@ public class Game2 {
         return startTime;
     }
 
-    public int getLives1() {
-        return lives1;
-    }
-
-    public int getLives2() {
-        return lives2;
+    public int getLives() {
+        return lives;
     }
 
     public static long getGameTime() {
@@ -233,17 +220,17 @@ public class Game2 {
                 }
                 if (e instanceof PlayerTank) {
                     playerTank1 = map.revivePlayerTank();
-                    lives1--;
+                    lives--;
                     deadTime = System.nanoTime();
-                    score -= 300;
-                    if (lives1>0) soundManager.onSlain();
+                    if (lives > 0) {
+                        soundManager.onSlain();
+                    }
                 }
                 if (e instanceof PlayerTank2) {
                     playerTank2 = map.revivePlayerTank2();
-                    lives2--;
+                    lives--;
                     deadTime = System.nanoTime();
-                    score -= 300;
-                    if (lives2 > 0) {
+                    if (lives > 0) {
                         soundManager.onSlain();
                     }
                 }
@@ -267,7 +254,7 @@ public class Game2 {
     public static final int ENEMY_TANK_MASK = 3;
 
     enum Status {  //游戏运行状态
-        Wait, Play, Lose1, Lose2, AllLose, AllWin
+        Wait, Play, AllLose, AllWin
     }
 
 }

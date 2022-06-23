@@ -41,7 +41,7 @@ public class GameHud2 {
     }
 
     public void updateLivesHud() {
-        livesHud.setText(String.format("玩家1: %d\t玩家2: %d", game2.getLives1(), game2.getLives2()));
+        livesHud.setText(String.format("玩家总生命: %d", game2.getLives()));
     }
 
     public void updateTimeHud() {
