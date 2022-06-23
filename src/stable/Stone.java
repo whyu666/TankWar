@@ -15,5 +15,7 @@ public final class Stone extends Stable {
 
 	@Override
 	protected void dealWithCollision(Sprite s) {
+
 	}
+
 }

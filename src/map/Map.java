@@ -17,6 +17,7 @@ public class Map implements Serializable {
 		this.homePos = homePos;
 		this.playerPos = playerPos;
 	}
+
 	//双人地图
 	public Map(int[][] tankPos, int[][] brickPos, int[][] stonePos, int[][] waterPos, int[][] grassPos, int[] homePos, int[] playerPos,int[]player2Pos) {
 		this.tankPos = tankPos;
@@ -28,4 +29,5 @@ public class Map implements Serializable {
 		this.playerPos = playerPos;
 		this.player2Pos = player2Pos;
 	}
+
 }

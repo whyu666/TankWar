@@ -1,13 +1,7 @@
 package map;
 
-import java.io.FileInputStream;
-import java.io.ObjectInputStream;
 import java.util.ArrayList;
 
-/**
- * @author wangyuanfeng
- * @data 2022/6/22 13:06
- */
 public class MapData2 {
 
     private final ArrayList<Map> maps;
@@ -52,7 +46,7 @@ public class MapData2 {
     };
     private static final int[] homePos1 = {320, 640};
     private static final int[] playerPos1 = {240, 640};
-    private static final int[] player2Pos1 = {400, 640};//玩家2
+    private static final int[] player2Pos1 = {400, 640};  //玩家2
 
     private static final int[][] tankPos2 = {
             {0, 0}, {320, 0}, {640, 0}
@@ -71,9 +65,7 @@ public class MapData2 {
             {80, 80, 80, 120}, {520, 560, 120, 80}, {480, 120, 80, 100}
     };
     private static final int[] homePos2 = {320, 640};
-
     private static final int[] playerPos2 = {240, 640};
-
     private static final int[] player2Pos2 = {400, 640};
 
     private static final int[][] tankPos3 = {
@@ -97,4 +89,5 @@ public class MapData2 {
     private static final int[] homePos3 = {320, 320};
     private static final int[] playerPos3 = {320, 240};
     private static final int[] player2Pos3 = {400,240};
+
 }

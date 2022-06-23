@@ -27,14 +27,12 @@ public class Main extends Application {
     private static final int FRAMES_PER_SECOND = 60;
     private static final int MILLISECOND_DELAY = 1000 / FRAMES_PER_SECOND;
     private static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
-
     private Game myGame;
     private Game2 myGame2;
     private Stage stage;
     private KeyFrame frame;
     private Timeline animation;
     private GameUI uiManager;
-//    private SoundManager soundManager;
     public static SoundManager soundManager;
 
     //处理开始按钮
@@ -43,29 +41,34 @@ public class Main extends Application {
 			gameStart();
 		}
     }
+
     //处理双人模式按钮
     class  GameTwo implements EventHandler<ActionEvent> {
         public void handle(ActionEvent event) {
             doubleGameStart();}
     }
+
     //处理帮助按钮
     class GameHelp implements EventHandler<ActionEvent> {
         public void handle(ActionEvent event) {
             gameHelp();
         }
     }
+
     //处理显示排行榜按钮
     class ShowLeaders implements EventHandler<ActionEvent> {
     	public void handle(ActionEvent event) {
 			showLeaders();
 		}
     }
+
     //处理退出按钮
     class GameExit implements EventHandler<ActionEvent> {
     	public void handle(ActionEvent event) {
 			stage.close();
 		}
     }
+
     //处理返回主界面按钮
     class GameReturn implements EventHandler<ActionEvent> {  //增加返回主界面动作
         public void handle(ActionEvent event) {
@@ -104,8 +107,8 @@ public class Main extends Application {
     private void doubleGameStart() {
         myGame2 = new Game2();
         stage.setTitle("保卫你的家");
-        uiManager.refreshGame();//文字不可输入
-        Scene gameScene = myGame2.initGameTwo(SIZE, SIZE);
+        uiManager.refreshGame();  //文字不可输入
+        Scene gameScene = myGame2.initGame2(SIZE, SIZE);
         stage.setScene(gameScene);
         //设置游戏循环
         frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY), e -> step2());
@@ -114,6 +117,7 @@ public class Main extends Application {
         animation.getKeyFrames().add(frame);
         animation.play();
     }
+
     private void step2() {
         switch(myGame2.getStatus()) {
             case AllLose:
@@ -199,7 +203,9 @@ public class Main extends Application {
         stage.setScene(startScene);
         stage.setResizable(false);
     }
+
     public static void main (String[] args) {
           launch(args);
     }
+
 }

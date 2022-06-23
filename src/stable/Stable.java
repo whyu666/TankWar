@@ -14,4 +14,5 @@ public abstract class Stable extends Sprite {
 	}
 	
 	protected abstract void setImageFile();
+
 }

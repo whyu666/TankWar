@@ -21,4 +21,5 @@ public class Home extends Stable {
 	protected void setImageFile() {
 		imageFile = "home.gif";
 	}
+
 }

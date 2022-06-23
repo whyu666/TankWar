@@ -27,4 +27,5 @@ public abstract class GameScene {
 	}
 
 	public abstract Scene initScene();
+
 }

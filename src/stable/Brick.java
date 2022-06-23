@@ -22,4 +22,5 @@ public final class Brick extends Stable {
 	protected void setImageFile() {
 		imageFile = "brick.gif";
 	}
+
 }

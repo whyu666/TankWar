@@ -165,4 +165,5 @@ public abstract class Tank extends Sprite {
 	protected static final String YELLOW_TANK_DOWN = "yellow-tank-down.gif";
 	protected static final String YELLOW_TANK_LEFT = "yellow-tank-left.gif";
 	protected static final String YELLOW_TANK_RIGHT = "yellow-tank-right.gif";
+
 }

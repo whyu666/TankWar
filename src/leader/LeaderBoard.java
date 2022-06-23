@@ -14,17 +14,14 @@ public class LeaderBoard {
 		try {
 			// 加载数据库驱动类
 			Class.forName("com.mysql.cj.jdbc.Driver");
-
 			// 获取数据库连接对象
 			 conn = DriverManager.getConnection(
-					"jdbc:mysql://localhost:3306/tankwar?serverTimezone=Hongkong&useUnicode=true&characterEncoding=utf8&useSSL=false",
+					"jdbc:mysql://localhost:3306/tankwar?serverTimezone=Hongkong&" +
+							"useUnicode=true&characterEncoding=utf8&useSSL=false",
 					"root", "wang1234");
 			stmt = conn.createStatement();
-		} catch (ClassNotFoundException cnfe) {
+		} catch (ClassNotFoundException | SQLException cnfe) {
 			cnfe.printStackTrace();
-		} catch (SQLException sqle)
-		{
-			sqle.printStackTrace();
 		}
 		ArrayList<Leader> lds = read();
 		if (lds != null) {
@@ -60,16 +57,13 @@ public class LeaderBoard {
 		return present;
 	}
 
-	/**/
 	public void save() {
 		try {
-			/*读取数据库数据并返回*/
-			for(int i =0; i<leaders.size();i++)
-			{
-				Leader leader = leaders.get(i);
+			//读取数据库数据并返回
+			for (Leader leader : leaders) {
 				String Sname = leader.getName();
 				int score = leader.getScore();
-				String queryString = String.format("insert into simple values(0,'%s','%d');",Sname,score);
+				String queryString = String.format("insert into simple values(0,'%s','%d');", Sname, score);
 				stmt.execute(queryString);
 			}
 		} catch(Exception ex) {
@@ -79,11 +73,11 @@ public class LeaderBoard {
 
 	private ArrayList<Leader> read() {
 		try {
-			/*读取数据库数据并返回*/
+			//读取数据库数据并返回
 			String queryString = "select * from simple order by sgrade desc,sname desc;";
 			ArrayList<Leader> past = new ArrayList<>();
 			PreparedStatement stmtRead =conn.prepareStatement(queryString);
-			ResultSet result = stmtRead.executeQuery();// 查询数据库，并返回查询结果
+			ResultSet result = stmtRead.executeQuery();  //查询数据库，并返回查询结果
 			int i = 0;
 			while (result.next()) {
 				if (i < 10) {
@@ -101,4 +95,80 @@ public class LeaderBoard {
 			return null;
 		}
 	}
+
 }
+
+/*
+package leader;
+
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.ArrayList;
+
+public class LeaderBoard {
+
+	private static final String LEADERS_FILE = "leaders.save";
+	private final ArrayList<Leader> leaders;
+	private static final int SIZE = 10;
+
+	public LeaderBoard() {
+		ArrayList<Leader> lds = read();
+		if (lds != null) {
+			leaders = lds;
+		}
+		else {
+			leaders = new ArrayList<>();
+		}
+	}
+
+	public boolean canGetOn(int score) {
+		if (leaders.size() < SIZE) {
+			return true;
+		}
+		return score > leaders.get(leaders.size() - 1).getScore();
+	}
+
+	public void putOn(Leader l) {
+		leaders.add(l);
+		leaders.sort(null);
+		//删除多余的leaders
+		for (int i = SIZE; i < leaders.size(); i++) {
+			leaders.remove(i--);
+		}
+	}
+
+	public ArrayList<Leader> getLeaders() {
+		int currentSize = leaders.size();
+		ArrayList<Leader> present = new ArrayList<>(leaders);
+		for (int i = 0; i < SIZE - currentSize; i++) {
+			present.add(new Leader("-", 0));
+		}
+		return present;
+	}
+
+	public void save() {
+		try {
+			FileOutputStream fout = new FileOutputStream(LEADERS_FILE);
+			ObjectOutputStream oos = new ObjectOutputStream(fout);
+			oos.writeObject(leaders);
+			oos.close();
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		}
+	}
+
+	private ArrayList<Leader> read() {
+		try {
+			FileInputStream fin = new FileInputStream(LEADERS_FILE);
+			ObjectInputStream ois = new ObjectInputStream(fin);
+			@SuppressWarnings("unchecked")
+			ArrayList<Leader> lds = (ArrayList<Leader>) ois.readObject();
+			ois.close();
+			return lds;
+		} catch(Exception ex) {
+			return null;
+		}
+	}
+ */

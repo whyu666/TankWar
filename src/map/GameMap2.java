@@ -9,18 +9,13 @@ import stable.*;
 
 import java.util.ArrayList;
 
-/**
- * @author wangyuanfeng
- * @data 2022/6/22 13:38
- */
 public class GameMap2 {
     private static final double SPAWN_POS = 0.0025;
     protected static final int unitSize = 20;
-
     private final int width, height;
     private ArrayList<Sprite> elements;
-    private PlayerTank playerTank;//玩家1
-    private PlayerTank2 playerTank2;//玩家2
+    private PlayerTank playerTank;  //玩家1
+    private PlayerTank2 playerTank2;  //玩家2
     private MapData2 data;
     private Map currentMap;
 
@@ -128,9 +123,11 @@ public class GameMap2 {
     public PlayerTank getPlayerTank() {
         return playerTank;
     }
+
     public PlayerTank2 getPlayerTank2() {
         return playerTank2;
     }
+
     //赋予玩家坦克生命
     public PlayerTank revivePlayerTank() {
         playerTank = new PlayerTank(elements);
@@ -144,10 +141,6 @@ public class GameMap2 {
         playerTank2.setPosition(currentMap.player2Pos[0], currentMap.player2Pos[1]);
         elements.add(playerTank2);
         return playerTank2;
-    }
-
-    public int numLevels() {
-        return data.numLevels();
     }
 
 }

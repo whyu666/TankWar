@@ -9,7 +9,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 
 public class StartScene extends GameScene {
@@ -24,7 +23,7 @@ public class StartScene extends GameScene {
         buttons.setSpacing(100);
         Button startButton = uiManager.initStartButton();
 		Button Double_game_Btn = uiManager.initDouble_gameButton();
-		Button help_Btn=uiManager.init_helpButton();
+		Button help_Btn = uiManager.init_helpButton();
     	buttons.getChildren().addAll(startButton, Double_game_Btn ,help_Btn);
     	buttons.setAlignment(Pos.CENTER);
     	return buttons;

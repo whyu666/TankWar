@@ -77,4 +77,5 @@ public class LeadersScene extends GameScene {
         leadersBox.getChildren().addAll(names, scores);
 		return leadersBox;
 	}
+
 }

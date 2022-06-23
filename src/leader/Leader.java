@@ -39,4 +39,5 @@ public class Leader implements Comparable<Leader>, Serializable {
 	public void setScore(int score) {
 		this.score = score;
 	}
+
 }

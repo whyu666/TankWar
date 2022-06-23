@@ -17,4 +17,5 @@ public class Grass extends Stable {
 	protected void dealWithCollision(Sprite s) {
 
 	}
+
 }

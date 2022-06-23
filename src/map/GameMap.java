@@ -16,11 +16,9 @@ public class GameMap {
 
 	private static final double SPAWN_POS = 0.0025;
 	protected static final int unitSize = 20;
-
 	private final int width, height;
 	private ArrayList<Sprite> elements;
 	private PlayerTank playerTank;
-
 	private MapData data;
 	private Map currentMap;
 
@@ -39,7 +37,6 @@ public class GameMap {
 		pad();
 		createMap(level);
 	}
-
 
 	private void pad() {
 		double x, y;
@@ -104,6 +101,7 @@ public class GameMap {
 		home.setPosition(currentMap.homePos[0], currentMap.homePos[1]);
 		elements.add(home);
 	}
+
 	//添加敌方坦克
 	public void spawnTank() {
 		for (int[] pos: currentMap.tankPos) {

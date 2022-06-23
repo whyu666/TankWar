@@ -1,11 +1,6 @@
 package ui;
 
-//游戏ui管理器
-//包含公共元素和逻辑
-//eventhandler来自main函数中的初始化
-
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -16,11 +11,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import leader.Leader;
 import leader.LeaderBoard;
-import map.Map;
 import misc.LengthLimitedTextField;
-
-import java.io.FileOutputStream;
-import java.io.ObjectOutputStream;
 
 public class GameUI {
 
@@ -30,12 +21,12 @@ public class GameUI {
 	private final EventHandler<ActionEvent> showLeaders;//点击排行榜事件
 	private final EventHandler<ActionEvent> gameExit;
 	private final EventHandler<ActionEvent> gameReturn;
-
 	private boolean didInputName;
 	private LeaderBoard board;
 
-	public GameUI(EventHandler<ActionEvent> start, EventHandler<ActionEvent> double_gameStart,EventHandler<ActionEvent> game_helpStart,EventHandler<ActionEvent> leaders, EventHandler<ActionEvent> exit,
-				  EventHandler<ActionEvent> ret) {
+	public GameUI(EventHandler<ActionEvent> start, EventHandler<ActionEvent> double_gameStart,
+				  EventHandler<ActionEvent> game_helpStart, EventHandler<ActionEvent> leaders,
+				  EventHandler<ActionEvent> exit, EventHandler<ActionEvent> ret) {
 		gameStart = start;
 		this.double_gameStart=double_gameStart;
 		this.game_helpStart=game_helpStart;
@@ -52,7 +43,7 @@ public class GameUI {
 
 	private void setBoard(LeaderBoard board) {
 		this.board = board;
-	}//排行榜
+	}
 
 	public Button initStartButton() {
 		Button startButton = new Button("开始游戏");
@@ -60,6 +51,7 @@ public class GameUI {
 		startButton.setOnAction(gameStart);
 		return startButton;
 	}
+
 	public Button initDouble_gameButton() {
 		Button Double_game = new Button("双人模式");
 		Double_game.setPrefWidth(120);

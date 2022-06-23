@@ -6,9 +6,9 @@ import java.util.ArrayList;
 public class EnemyTank extends Tank {
 
 	private long lastChangeDirection = System.nanoTime();
-	private static final long DIRECTION_DELAY = 1000 * 100000L;	//变换方向时间，单位ms
-	private static final double DIRECTION_CHANGE_POS = 0.1;	//更改方向的概率
-	private static final double FIRE_MISSILE_POS = 0.02;		//发射子弹的概率
+	private static final long DIRECTION_DELAY = 1000 * 100000L;  //变换方向时间，单位ms
+	private static final double DIRECTION_CHANGE_POS = 0.1;  //更改方向的概率
+	private static final double FIRE_MISSILE_POS = 0.02;  //发射子弹的概率
 	
 	public EnemyTank(ArrayList<Sprite> elements) {
 		super(elements);
@@ -84,4 +84,5 @@ public class EnemyTank extends Tank {
 			health--;
 		}
 	}
+
 }

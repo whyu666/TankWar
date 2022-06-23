@@ -1,12 +1,12 @@
 package game;
 
+import java.util.ArrayList;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 import map.GameMap2;
 import sprite.Direction;
 import sprite.PlayerTank;
@@ -14,54 +14,35 @@ import sprite.PlayerTank2;
 import sprite.Sprite;
 import stable.Home;
 import ui.GameHud2;
-import game.KeyMon;
-
-import java.util.ArrayList;
-
 import static game.Main.soundManager;
 
-/**
- * @author wangyuanfeng
- * @data 2022/6/22 7:07
- */
 public class Game2 {
 
-    public static KeyMon keyMon;	//游戏输入管理
-    private static final String TITLE = "保卫你的家";
+    private static KeyMon keyMon;  //游戏输入管理
     private Game2.Status status = Game2.Status.Wait;
     private int currentLevel = 0;  //当前关卡
-
     private long deadTime = System.nanoTime();
     private static final long DIE_DELAY = 200 * 1000000L;  //玩家坦克阵亡后延时一段时间
-
-    public int lives1, lives2;
+    private int lives1, lives2;
     private int score;
     private static final int INITIAL_LIVES = 6;
     private static final int SCORE_UNIT = 100;
-
     private GraphicsContext gc;
     private PlayerTank playerTank1;
     private PlayerTank2 playerTank2;
     private int width, height;
     private GameMap2 map;
     private GameHud2 hudManager;
-
-    public static final long GAME_TIME_SECONDS = 120;  //每一关游戏时间
+    private static final long GAME_TIME_SECONDS = 120;  //每一关游戏时间
     private static final long GAME_TIME = GAME_TIME_SECONDS * 1000000000L;
     private long startTime = System.nanoTime();
-
     private ArrayList<Sprite> elements = new ArrayList<>();
-
     public static double playerTank1PositionX = 240;
     public static double playerTank1PositionY = 640;
     public static double playerTank2PositionX = 400;
     public static double playerTank2PositionY = 640;
 
-    public String getTitle() {
-        return TITLE;
-    }
-
-    public Scene initGameTwo(int width, int height) {
+    public Scene initGame2(int width, int height) {
         status = Game2.Status.Play;
         this.width = width;
         this.height = height;
@@ -78,10 +59,9 @@ public class Game2 {
         root.setTop(hudManager.initHud());
         map = new GameMap2(width, height);
         map.init(elements);
-        int numLevels = map.numLevels();
         nextLevel();  //进入第一关
         gc = initGraphicsContext(root);
-        Scene myScene = new Scene(root, width, height + hudManager.getlivesHudHeight(), Color.BLACK);
+        Scene myScene = new Scene(root, width, height + hudManager.getLivesHudHeight(), Color.BLACK);
         keyMon = new KeyMon(myScene);	//处理游戏输入
         myScene.setOnKeyPressed(e -> handleCheatKey(e.getCode()));  //处理作弊输入
         return myScene;
@@ -177,15 +157,12 @@ public class Game2 {
         }
     }
 
-    //处理作弊输入
     private void handleCheatKey(KeyCode code) {
         if (System.nanoTime() - deadTime < DIE_DELAY) {  //当在阵亡延时中，忽略按键输入
             return;
         }
-        switch (code) {
-            case N:
-                status = Status.AllLose;
-                break;
+        if (code == KeyCode.N) {
+            status = Status.AllLose;
         }
     }
 
@@ -207,10 +184,6 @@ public class Game2 {
         }
     }
 
-    public int getCurrentLevel() {
-        return currentLevel;
-    }
-
     public long getStartTime() {
         return startTime;
     }
@@ -221,6 +194,10 @@ public class Game2 {
 
     public int getLives2() {
         return lives2;
+    }
+
+    public static long getGameTime() {
+        return GAME_TIME_SECONDS;
     }
 
     private GraphicsContext initGraphicsContext(BorderPane root) {
@@ -254,7 +231,6 @@ public class Game2 {
                     i++;
                     continue;
                 }
-                //if (e.getBITMASK() == playerTank1.getBITMASK()) {
                 if (e instanceof PlayerTank) {
                     playerTank1 = map.revivePlayerTank();
                     lives1--;
@@ -262,13 +238,14 @@ public class Game2 {
                     score -= 300;
                     if (lives1>0) soundManager.onSlain();
                 }
-                //if (e.getBITMASK() == playerTank2.getBITMASK()) {
                 if (e instanceof PlayerTank2) {
                     playerTank2 = map.revivePlayerTank2();
                     lives2--;
                     deadTime = System.nanoTime();
                     score -= 300;
-                    if (lives2>0) soundManager.onSlain();
+                    if (lives2 > 0) {
+                        soundManager.onSlain();
+                    }
                 }
                 else if (e.getBITMASK() == ENEMY_TANK_MASK) {  //敌方坦克被子弹击中
                     score += SCORE_UNIT;
@@ -287,13 +264,10 @@ public class Game2 {
         return status;
     }
 
-    public static final int PLAYER_TANK_MASK = 1;     //二进制：0001
-    public static final int ENEMY_TANK_MASK = 3;      //二进制：0010
-    public static final int PLAYER_MISSILE_MASK = 6;  //二进制：0110
-    public static final int ENEMY_MISSILE_MASK = 9;   //二进制：1001
-    public static final int STABLE_MASK = 15;         //二进制：1111
+    public static final int ENEMY_TANK_MASK = 3;
 
     enum Status {  //游戏运行状态
         Wait, Play, Lose1, Lose2, AllLose, AllWin
     }
+
 }

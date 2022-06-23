@@ -83,11 +83,8 @@ public class MapData {
 		{80, 80, 80, 120}, {520, 560, 120, 80}, {480, 120, 80, 100}
 	};
 	private static final int[] homePos2 = {320, 640};
-
 	private static final int[] playerPos2 = {240, 640};
 
-
-	
 	private static final int[][] tankPos3 = {
 		{0, 0}, {640, 0}, {0, 640}, {640, 640}
 	};

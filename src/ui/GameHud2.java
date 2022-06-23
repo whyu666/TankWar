@@ -9,6 +9,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 public class GameHud2 {
+
     private Text livesHud;
     private Text timeHud;
     private final Game2 game2;
@@ -40,14 +41,15 @@ public class GameHud2 {
     }
 
     public void updateLivesHud() {
-        livesHud.setText(String.format("玩家1: %d\t玩家2: %d", game2.lives1, game2.lives2));
+        livesHud.setText(String.format("玩家1: %d\t玩家2: %d", game2.getLives1(), game2.getLives2()));
     }
 
     public void updateTimeHud() {
-        timeHud.setText("时间: " + (Game2.GAME_TIME_SECONDS - (System.nanoTime() - game2.getStartTime()) / 1000000000L));
+        timeHud.setText("时间: " + (Game2.getGameTime() - (System.nanoTime() - game2.getStartTime()) / 1000000000L));
     }
 
-    public double getlivesHudHeight() {
+    public double getLivesHudHeight() {
         return livesHud.getLayoutBounds().getHeight();
     }
+
 }

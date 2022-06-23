@@ -8,11 +8,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 
-/**
- * @author wangyuanfeng
- * @data 2022/6/22 9:46
- * 游戏结束画面
- */
 public class OverScene2 extends GameScene {
 
     public OverScene2(GameUI manager, int SIZE, Game2 gametwo) {
@@ -33,4 +28,5 @@ public class OverScene2 extends GameScene {
         root.getChildren().addAll(startButton, returnButton, exitButton);
         return new Scene(root, SIZE, SIZE);
     }
+
 }

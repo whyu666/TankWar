@@ -17,4 +17,5 @@ public class Water extends Stable {
 	protected void dealWithCollision(Sprite s) {
 
 	}
+
 }

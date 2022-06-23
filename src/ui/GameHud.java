@@ -1,7 +1,6 @@
 package ui;
 
 import game.Game;
-import game.Game2;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.layout.BorderPane;
@@ -12,9 +11,7 @@ import javafx.scene.text.Text;
 
 public class GameHud {
 
-	private Text timeHud;
-	private Text livesHud;
-	private Text levelHud;
+	private Text timeHud, livesHud, levelHud;
 	private final Game myGame;
 	
 	public GameHud(Game game) {
@@ -55,10 +52,11 @@ public class GameHud {
 	}
 	
 	public void updateTimeHud() {
-		timeHud.setText("时间: " + (Game.GAME_TIME_SECONDS - (System.nanoTime() - myGame.getStartTime()) / 1000000000L));
+		timeHud.setText("时间: " + (Game.getGameTime() - (System.nanoTime() - myGame.getStartTime()) / 1000000000L));
 	}
 	
 	public void updateLevelHud() {
 		levelHud.setText("关卡: " + myGame.getCurrentLevel());
 	}
+
 }

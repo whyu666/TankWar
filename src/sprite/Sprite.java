@@ -55,19 +55,6 @@ public abstract class Sprite implements Comparable<Sprite> {
         return positionY;
     }
 
-    public void setVelocity(double x, double y) {
-        velocityX = x;
-        velocityY = y;
-    }
-    
-    public double getWidth() {
-    	return width;
-    }
-    
-    public double getHeight() {
-    	return height;
-    }
-
     public void update(double time) {  //根据时间，进行更新操作
     	lastX = positionX;
         lastY = positionY;
@@ -114,11 +101,8 @@ public abstract class Sprite implements Comparable<Sprite> {
 		return BITMASK;
 	}
 
-	public void setBITMASK(int bitMASK) {
-		BITMASK = bitMASK;
-	}
-
 	public void setAlive(boolean alive) {
 		this.alive = alive;
 	}
+
 }

@@ -41,4 +41,5 @@ public class Missile extends Sprite {
 			health = 0;
 		}
 	}
+
 }

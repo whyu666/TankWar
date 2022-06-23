@@ -33,4 +33,5 @@ public class OverScene extends GameScene {
     	root.getChildren().addAll(startButton, leadersButton, returnButton, exitButton);
 		return new Scene(root, SIZE, SIZE);
     }
+
 }

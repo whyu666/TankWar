@@ -5,14 +5,10 @@ import java.util.ArrayList;
 
 public class PlayerTank2 extends Tank {
 
-	private static final long IMMORTAL_DELAY = 0;  //buff持续时间：0秒
-	private long immortalStartTime = System.nanoTime();  //生成玩家坦克时，记录时间
-
 	public PlayerTank2(ArrayList<Sprite> elements) {
 		super(elements);
 		setYellow();
 		BITMASK = Game.PLAYER_TANK_MASK;
-		//buffImmortal();  //初始化时，添加buff
 	}
 	
 	public void update(double time) {
