@@ -8,6 +8,7 @@ public class LeaderBoard {
 	private final ArrayList<Leader> leaders;
 	private static final int SIZE = 10;
 	private static Statement stmt;
+	private static Connection conn;
 
 	public LeaderBoard() {
 		try {
@@ -19,11 +20,8 @@ public class LeaderBoard {
 					"jdbc:mysql://localhost:3306/TankWar?serverTimezone=Hongkong&useUnicode=true&characterEncoding=utf8&useSSL=true",
 					"root", "wang1234");
 			stmt = conn.createStatement();
-		} catch (ClassNotFoundException cnfe) {
+		} catch (ClassNotFoundException | SQLException cnfe) {
 			cnfe.printStackTrace();
-		} catch (SQLException sqle)
-		{
-			sqle.printStackTrace();
 		}
 		ArrayList<Leader> lds = read();
 		if (lds != null) {
@@ -59,29 +57,19 @@ public class LeaderBoard {
 		return present;
 	}
 
-	/**/
 	public void save() {
 		try {
-			/*读取数据库数据并返回*/
-			for(int i =0; i<leaders.size();i++)
-			{
-				Leader leader = leaders.get(i);
+			/*写入数据库数据*/
+			for (Leader leader : leaders) {
 				String Sname = leader.getName();
 				int score = leader.getScore();
-				String queryString = String.format("insert into simple values(0,'%s','%d';",Sname,score);
-				stmt.executeQuery(queryString);
+				String queryString = String.format("insert into simple values(0,'%s','%d');", Sname, score);
+				stmt.execute(queryString);
+
 			}
 		} catch(Exception ex) {
 			ex.printStackTrace();
 		}
-//		try {
-//			FileOutputStream fout = new FileOutputStream(LEADERS_FILE);
-//			ObjectOutputStream oos = new ObjectOutputStream(fout);
-//			oos.writeObject(leaders);
-//			oos.close();
-//		} catch(Exception ex) {
-//			ex.printStackTrace();
-//		}
 	}
 
 	private ArrayList<Leader> read() {
@@ -89,9 +77,9 @@ public class LeaderBoard {
 			/*读取数据库数据并返回*/
 			String queryString = "select * from simple order by sgrade desc,sname desc;";
 			ArrayList<Leader> past =new ArrayList<>(leaders);
-			ResultSet result = stmt.executeQuery(queryString);// 查询数据库，并返回查询结果
-			while (result.next())
-			{
+			PreparedStatement stmtRead = conn.prepareStatement(queryString);
+			ResultSet result = stmtRead.executeQuery();  //查询数据库，并返回查询结果
+			while (result.next()) {
 				String firstName =  result.getString("Sname");
 				int score = result.getInt(3);
 				past.add(new Leader(firstName,score));
@@ -177,4 +165,4 @@ public class LeaderBoard {
 		}
 	}
 }
- */
+*/
