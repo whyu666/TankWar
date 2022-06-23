@@ -8,36 +8,22 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
-/**
- * @author wangyuanfeng
- * @data 2022/6/22 9:32
- */
 public class GameHud2 {
+    private Text livesHud;
     private Text timeHud;
-    private Text livesHud1;
-    private Text livesHud2;
-    private Text levelHud;
-    private Game2 gameTwo;
+    private final Game2 game2;
 
-    public GameHud2(Game2 gametwo) {
-        this.gameTwo = gametwo;
+    public GameHud2(Game2 newGame2) {
+        this.game2 = newGame2;
     }
 
     public HBox initHud() {
+        livesHud = new Text();
+        configureGameHud(livesHud);
         timeHud = new Text();
         configureGameHud(timeHud);
-
-        livesHud1 = new Text();
-        configureGameHud(livesHud1);
-
-        livesHud2=new Text();
-        configureGameHud(livesHud2);
-
-        levelHud = new Text();
-        configureGameHud(levelHud);
-
         HBox box = new HBox();
-        box.getChildren().addAll(livesHud1, livesHud2,timeHud, levelHud);
+        box.getChildren().addAll(livesHud, timeHud);
         box.setSpacing(120);  //居中显示
         BorderPane.setAlignment(box, Pos.CENTER);
         return box;
@@ -51,24 +37,17 @@ public class GameHud2 {
     public void updateHud() {
         updateLivesHud();
         updateTimeHud();
-        updateLevelHud();
     }
 
     public void updateLivesHud() {
-        livesHud1.setText(String.format("总生命: %d", gameTwo.lives1));
+        livesHud.setText(String.format("玩家1: %d\t玩家2: %d", game2.lives1, game2.lives2));
     }
 
     public void updateTimeHud() {
-        timeHud.setText("时间: " + (Game2.GAME_TIME_SECONDS - (System.nanoTime() - gameTwo.getStartTime()) / 1000000000L));
+        timeHud.setText("时间: " + (Game2.GAME_TIME_SECONDS - (System.nanoTime() - game2.getStartTime()) / 1000000000L));
     }
 
-    public void updateLevelHud() {
-        levelHud.setText("关卡: " + gameTwo.getCurrentLevel());
-    }
-    public double getlivesHud1Height() {
-        return livesHud1.getLayoutBounds().getHeight();
-    }
-    public double getlivesHud2Height() {
-        return livesHud2.getLayoutBounds().getHeight();
+    public double getlivesHudHeight() {
+        return livesHud.getLayoutBounds().getHeight();
     }
 }

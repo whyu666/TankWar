@@ -17,8 +17,8 @@ public class LeaderBoard {
 
 			// 获取数据库连接对象
 			 conn = DriverManager.getConnection(
-					"jdbc:mysql://localhost:3306/leaderboard_db?serverTimezone=Hongkong&useUnicode=true&characterEncoding=utf8&useSSL=false",
-					"root", "1q2w3e4r");
+					"jdbc:mysql://localhost:3306/tankwar?serverTimezone=Hongkong&useUnicode=true&characterEncoding=utf8&useSSL=false",
+					"root", "wang1234");
 			stmt = conn.createStatement();
 		} catch (ClassNotFoundException cnfe) {
 			cnfe.printStackTrace();

@@ -12,7 +12,7 @@ public class PlayerTank extends Tank {
 		super(elements);
 		setGreen();
 		BITMASK = Game.PLAYER_TANK_MASK;
-		buffImmortal();  //初始化时，添加buff
+		//buffImmortal();  //初始化时，添加buff
 	}
 	
 	public void update(double time) {

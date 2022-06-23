@@ -14,6 +14,7 @@ import sprite.PlayerTank2;
 import sprite.Sprite;
 import stable.Home;
 import ui.GameHud2;
+import game.KeyMon;
 
 import java.util.ArrayList;
 
@@ -24,6 +25,8 @@ import static game.Main.soundManager;
  * @data 2022/6/22 7:07
  */
 public class Game2 {
+
+    public static KeyMon keyMon;	//游戏输入管理
     private static final String TITLE = "保卫你的家";
     private Game2.Status status = Game2.Status.Wait;
     private int currentLevel = 0;  //当前关卡
@@ -43,7 +46,7 @@ public class Game2 {
     private GameMap2 map;
     private GameHud2 hudManager;
 
-    public static final long GAME_TIME_SECONDS = 10;  //每一关游戏时间
+    public static final long GAME_TIME_SECONDS = 120;  //每一关游戏时间
     private static final long GAME_TIME = GAME_TIME_SECONDS * 1000000000L;
     private long startTime = System.nanoTime();
 
@@ -78,8 +81,9 @@ public class Game2 {
         int numLevels = map.numLevels();
         nextLevel();  //进入第一关
         gc = initGraphicsContext(root);
-        Scene myScene = new Scene(root, width, height + hudManager.getlivesHud1Height(), Color.BLACK);
-        myScene.setOnKeyPressed(e -> handleKeyInput(e.getCode()));  //对输入进行响应
+        Scene myScene = new Scene(root, width, height + hudManager.getlivesHudHeight(), Color.BLACK);
+        keyMon = new KeyMon(myScene);	//处理游戏输入
+        myScene.setOnKeyPressed(e -> handleCheatKey(e.getCode()));  //处理作弊输入
         return myScene;
     }
 
@@ -102,6 +106,9 @@ public class Game2 {
             gc.clearRect(0, 0, width, height);
             soundManager.playVictory();
             return;
+        }
+        for (KeyCode k:keyMon.keyStore) {
+            handleKeyInput(k);    //响应玩家操作
         }
         updateElements(elapsedTime);  //更新元素、状态、得分
         detectCollisions();  //判断是否摧毁元素
@@ -126,46 +133,58 @@ public class Game2 {
         }
         switch (code) {
             case ENTER:
-                playerTank1.fireMissile();
-                soundManager.onShoot();
-                break;
-            case RIGHT:
-                playerTank1.setDirection(Direction.RIGHT);
-                playerTank1PositionY = playerTank1.getPositionY();
-                break;
-            case LEFT:
-                playerTank1.setDirection(Direction.LEFT);
-                playerTank1PositionY = playerTank1.getPositionY();
-                break;
-            case UP:
-                playerTank1.setDirection(Direction.UP);
-                playerTank1PositionX = playerTank1.getPositionX();
-                break;
-            case DOWN:
-                playerTank1.setDirection(Direction.DOWN);
-                playerTank1PositionX = playerTank1.getPositionX();
-                break;
-            case SPACE:
                 playerTank2.fireMissile();
                 soundManager.onShoot();
                 break;
-            case D:
+            case RIGHT:
                 playerTank2.setDirection(Direction.RIGHT);
+                playerTank2PositionY = playerTank1.getPositionY();
+                break;
+            case LEFT:
+                playerTank2.setDirection(Direction.LEFT);
+                playerTank2PositionY = playerTank1.getPositionY();
+                break;
+            case UP:
+                playerTank2.setDirection(Direction.UP);
+                playerTank2PositionX = playerTank1.getPositionX();
+                break;
+            case DOWN:
+                playerTank2.setDirection(Direction.DOWN);
+                playerTank2PositionX = playerTank1.getPositionX();
+                break;
+            case SPACE:
+                playerTank1.fireMissile();
+                soundManager.onShoot();
+                break;
+            case D:
+                playerTank1.setDirection(Direction.RIGHT);
                 System.out.println(playerTank2.getPositionX());
-                playerTank2PositionY = playerTank2.getPositionY();
+                playerTank1PositionY = playerTank2.getPositionY();
                 break;
             case A:
-                playerTank2.setDirection(Direction.LEFT);
-                playerTank2PositionY = playerTank2.getPositionY();
+                playerTank1.setDirection(Direction.LEFT);
+                playerTank1PositionY = playerTank2.getPositionY();
                 break;
             case W:
-                playerTank2.setDirection(Direction.UP);
-                playerTank2PositionX = playerTank2.getPositionX();
+                playerTank1.setDirection(Direction.UP);
+                playerTank1PositionX = playerTank2.getPositionX();
                 break;
             case S:
-                playerTank2.setDirection(Direction.DOWN);
-                playerTank2PositionX = playerTank2.getPositionX();
+                playerTank1.setDirection(Direction.DOWN);
+                playerTank1PositionX = playerTank2.getPositionX();
             default:
+                break;
+        }
+    }
+
+    //处理作弊输入
+    private void handleCheatKey(KeyCode code) {
+        if (System.nanoTime() - deadTime < DIE_DELAY) {  //当在阵亡延时中，忽略按键输入
+            return;
+        }
+        switch (code) {
+            case N:
+                status = Status.AllLose;
                 break;
         }
     }

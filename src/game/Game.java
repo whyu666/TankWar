@@ -154,6 +154,7 @@ public class Game {
 			currentLevel++;
 		}
 
+		//处理游戏输入
 		private void handleGameKey(KeyCode code) {
 			if (System.nanoTime() - deadTime < DIE_DELAY) {  //当在阵亡延时中，忽略按键输入
 				return;
@@ -188,6 +189,7 @@ public class Game {
 			}
 		}
 
+		//处理作弊输入
 		private void handleCheatKey(KeyCode code) {
 			if (System.nanoTime() - deadTime < DIE_DELAY) {  //当在阵亡延时中，忽略按键输入
 				return;
