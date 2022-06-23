@@ -59,11 +59,13 @@ public class LeaderBoard {
 
 	public void save() {
 		try {
+			String queryString = "delete from simple;";
+			stmt.execute(queryString);
 			//读取数据库数据并返回
 			for (Leader leader : leaders) {
 				String Sname = leader.getName();
 				int score = leader.getScore();
-				String queryString = String.format("insert into simple values(0,'%s','%d');", Sname, score);
+				queryString = String.format("insert into simple values(0,'%s','%d');", Sname, score);
 				stmt.execute(queryString);
 			}
 		} catch(Exception ex) {
