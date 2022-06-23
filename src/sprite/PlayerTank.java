@@ -17,7 +17,7 @@ public class PlayerTank extends Tank {
 	
 	public void update(double time) {
 		super.update(time);
-		SPEED = 1000;  //控制玩家坦克速度
+		SPEED = 300;  //控制玩家坦克速度
 		if (getDirection() != Direction.NONE) {  //当坦克方向改变时，子弹发射方向也随之改变
 			missileDirection = getDirection();
 		}
