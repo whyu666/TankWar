@@ -75,14 +75,6 @@ public class LeaderBoard {
 		} catch(Exception ex) {
 			ex.printStackTrace();
 		}
-//		try {
-//			FileOutputStream fout = new FileOutputStream(LEADERS_FILE);
-//			ObjectOutputStream oos = new ObjectOutputStream(fout);
-//			oos.writeObject(leaders);
-//			oos.close();
-//		} catch(Exception ex) {
-//			ex.printStackTrace();
-//		}
 	}
 
 	private ArrayList<Leader> read() {
@@ -90,11 +82,16 @@ public class LeaderBoard {
 			/*读取数据库数据并返回*/
 			String queryString = "select * from simple order by sgrade desc,sname desc;";
 			ArrayList<Leader> past = new ArrayList<>();
-//			ArrayList<Leader> past = leaders;
 			PreparedStatement stmtRead =conn.prepareStatement(queryString);
 			ResultSet result = stmtRead.executeQuery();// 查询数据库，并返回查询结果
-			while (result.next())
-			{
+			int i = 0;
+			while (result.next()) {
+				if (i < 10) {
+					i++;
+				}
+				else {
+					break;
+				}
 				String firstName =  result.getString("Sname");
 				int score = result.getInt(3);
 				past.add(new Leader(firstName,score));
