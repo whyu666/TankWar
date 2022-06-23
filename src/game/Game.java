@@ -1,6 +1,7 @@
 package game;
 
 import java.util.ArrayList;
+
 import javafx.scene.Scene;
 import javafx.scene.canvas.*;
 import javafx.scene.input.KeyCode;
@@ -18,7 +19,9 @@ import static game.Main.soundManager;
 
 public class Game {
 
-		private static final String TITLE = "保卫你的家";
+	public static KeyMon keyMon;	//游戏输入管理
+
+	private static final String TITLE = "保卫你的家";
 		private Status status = Status.Wait;
 		private int currentLevel = 0;
 
@@ -82,7 +85,10 @@ public class Game {
 			nextLevel();  //进入第一关
 			gc = initGraphicsContext(root);
 			Scene myScene = new Scene(root, width, height + hudManager.getHeight(), Color.BLACK);
-			myScene.setOnKeyPressed(e -> handleKeyInput(e.getCode()));  //对输入进行响应
+
+			keyMon = new KeyMon(myScene);	//处理游戏输入
+			myScene.setOnKeyPressed(e -> handleCheatKey(e.getCode()));  //处理作弊输入
+
 			return myScene;
 		}
 
@@ -110,6 +116,9 @@ public class Game {
 			if (status == Status.ToLose && System.nanoTime() - toLoseTime > LOSE_DELAY) {
 				status = Status.Lost;
 				return;
+			}
+			for (KeyCode k:keyMon.keyStore) {
+				handleGameKey(k);    //响应玩家操作
 			}
 			updateElements(elapsedTime);  //更新元素、状态、得分
 			detectCollisions();  //判断是否摧毁元素
@@ -145,7 +154,7 @@ public class Game {
 			currentLevel++;
 		}
 
-		private void handleKeyInput (KeyCode code) {
+		private void handleGameKey(KeyCode code) {
 			if (System.nanoTime() - deadTime < DIE_DELAY) {  //当在阵亡延时中，忽略按键输入
 				return;
 			}
@@ -174,6 +183,16 @@ public class Game {
 					playerTank.setDirection(Direction.DOWN);
 					playerTankPositionX = playerTank.getPositionY();
 					break;
+				default:
+					break;
+			}
+		}
+
+		private void handleCheatKey(KeyCode code) {
+			if (System.nanoTime() - deadTime < DIE_DELAY) {  //当在阵亡延时中，忽略按键输入
+				return;
+			}
+			switch (code) {
 				case C:
 					clearEnemies();
 					break;
@@ -185,8 +204,6 @@ public class Game {
 					break;
 				case N:
 					nextLevel();
-					break;
-				default:
 					break;
 			}
 		}

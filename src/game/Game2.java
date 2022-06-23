@@ -17,6 +17,8 @@ import ui.GameHud2;
 
 import java.util.ArrayList;
 
+import static game.Main.soundManager;
+
 /**
  * @author wangyuanfeng
  * @data 2022/6/22 7:07
@@ -92,11 +94,13 @@ public class Game2 {
         }
         if (lives1 <= 0 && lives2 <= 0 && status != Status.AllLose) {
             status = Status.AllLose;
+            soundManager.playDefeat();
             return;
         }
         if (status == Status.Play && System.nanoTime() - startTime > GAME_TIME) {
             status = Status.AllWin;
             gc.clearRect(0, 0, width, height);
+            soundManager.playVictory();
             return;
         }
         updateElements(elapsedTime);  //更新元素、状态、得分
@@ -123,6 +127,7 @@ public class Game2 {
         switch (code) {
             case ENTER:
                 playerTank1.fireMissile();
+                soundManager.onShoot();
                 break;
             case RIGHT:
                 playerTank1.setDirection(Direction.RIGHT);
@@ -142,6 +147,7 @@ public class Game2 {
                 break;
             case SPACE:
                 playerTank2.fireMissile();
+                soundManager.onShoot();
                 break;
             case D:
                 playerTank2.setDirection(Direction.RIGHT);
@@ -159,9 +165,6 @@ public class Game2 {
             case S:
                 playerTank2.setDirection(Direction.DOWN);
                 playerTank2PositionX = playerTank2.getPositionX();
-            case N:
-                nextLevel();
-                break;
             default:
                 break;
         }
@@ -238,6 +241,7 @@ public class Game2 {
                     lives1--;
                     deadTime = System.nanoTime();
                     score -= 300;
+                    if (lives1>0) soundManager.onSlain();
                 }
                 //if (e.getBITMASK() == playerTank2.getBITMASK()) {
                 if (e instanceof PlayerTank2) {
@@ -245,9 +249,11 @@ public class Game2 {
                     lives2--;
                     deadTime = System.nanoTime();
                     score -= 300;
+                    if (lives2>0) soundManager.onSlain();
                 }
                 else if (e.getBITMASK() == ENEMY_TANK_MASK) {  //敌方坦克被子弹击中
                     score += SCORE_UNIT;
+                    soundManager.onKill();
                 }
                 elements.remove(i);
             }
