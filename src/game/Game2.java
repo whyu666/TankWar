@@ -212,9 +212,10 @@ public class Game2 {
             }
             else {
                 if (e instanceof Home) {  //家不存在
-                    if (status == Status.Play) {
-                        status = Status.AllLose;
-                    }
+//                    if (status == Status.Play) {
+//                        status = Status.AllLose;
+//                    }
+                    status = Status.AllLose;
                     i++;
                     continue;
                 }
